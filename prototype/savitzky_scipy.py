@@ -13,7 +13,8 @@ ecg = ecg[0] # extract 1-dim list from 2-dim list
 
 # Savitzky-Golay filtering
 # http://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.savgol_filter.html
-ecg_filtered = signal.savgol_filter(ecg, 7, 2)
+ecg_filtered = signal.savgol_filter(ecg, 7, 2, deriv=0, delta=1.0, axis=-1, mode='interp', cval=0.0)
+# keyword args with default values: deriv=0, delta=1.0, axis=-1, mode='interp', cval=0.0
 
 # do the plotting with pyplot
 plt.plot(t, ecg, 'b-', t, ecg_filtered, 'g-')
