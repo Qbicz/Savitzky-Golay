@@ -17,7 +17,9 @@ ecg_filtered = signal.savgol_filter(ecg, 7, 2, deriv=0, delta=1.0, axis=-1, mode
 # keyword args with default values: deriv=0, delta=1.0, axis=-1, mode='interp', cval=0.0
 
 # do the plotting with pyplot
-plt.plot(t, ecg, 'b-', t, ecg_filtered, 'g-')
+plt.plot(t, ecg, 'b-', label="ECG")
+plt.plot(t, ecg_filtered, 'g-', label="ECG filtered")
 plt.ylabel('ECG signal')
 plt.xlabel('Time [s]')
+plt.legend()
 plt.show()
