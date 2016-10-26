@@ -37,6 +37,8 @@ plt.plot(impulse_domain, h, '-r', label='Impulse response h')
 #context = ecg[n-M:n+M]
 #print('Context:', context)
 
+# TODO: perform a convolution from n-M to n+M of sum( h[n-m] * x[n])
+
 # 
 #ecg_filtered = 
 
