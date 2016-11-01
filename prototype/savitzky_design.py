@@ -13,15 +13,14 @@ data = read_datafile('../mit-bih-txt/mitdb100short.txt')
 
 # short test data - 300 samples
 # time vector
-t = data[0][60:100]
+t = data[0][180:200]
 
 # ECG vector
-x = data[1][60:100]
+x = data[1][180:200]
 
 # Savitzky-Golay filtering
-M = 3
-N = 2
-n = 10
+M = 3 # window width is 2M+1
+N = 2 # fitting polynomial degree
 
 # d is impulse sequence
 d = np.concatenate([np.zeros(M), [1], np.zeros(M)])
@@ -31,16 +30,9 @@ a = np.polyfit(impulse_domain, d, N)
 print('polynomial coefficients a =', a)
 h = np.flipud(np.polyval(a, impulse_domain))
 
-# plot impulse polynomial design
-#plt.plot(impulse_domain, d, label='impulse sequence')
-#plt.plot(impulse_domain, h, '-r', label='Impulse response h')
-
-#context = ecg[n-M:n+M]
-#print('Context:', context)
-
 # TODO: perform a convolution from n-M to n+M of sum( h[n-m] * x[n])
-#y = x[0:3]
-print(y)
+y = []
+#print(y)
 
 # Treatment of first and last points: use 'mirror' extrapolation
 xfirst = np.flipud(x[1:M+1])
@@ -51,37 +43,39 @@ print('...')
 print('x[-10:]', x[-10:])
 print(xlast)
 
-x_mirror = np.concatenate(xfirst, x, xlast)
+x_mirror = np.concatenate((xfirst, x, xlast))
 
-for n in range(M, len(x)-M):
-    impulse_domain = np.arange(n-M,n+M+1)
-    a = np.polyfit(impulse_domain, d, N)
-    h = np.flipud(np.polyval(a, impulse_domain))
-    y = np.append(y, 0)
-    print(n)
+# for n in range(M, len(x_mirror)-M):
+    # # TODO: compute h only once
+    # impulse_domain = np.arange(n-M,n+M+1)
+    # a = np.polyfit(impulse_domain, d, N)
+    # h = np.flipud(np.polyval(a, impulse_domain))
+    # y = np.append(y, 0)
+    # print(n)
     
-    # reference
-    hr = signal.savgol_coeffs(2*M+1, N, deriv=0, delta=1.0)
-    #print('hr: ', hr)
-    #print('h:', h)
+    # # reference
+    # hr = signal.savgol_coeffs(2*M+1, N, deriv=0, delta=1.0)
+    # #print('hr: ', hr)
+    # #print('h:', h)
     
-    for m in range(n-M, n+M):
-        #print('n=%d, m=%d' % (n,m))
-        #print('h[n-m]', h[n-m])
-        #print(x[m])
-        #print(y[n])
-        y[n] += h[n-m] * x[m]
-                
+    # for m in range(n-M, n+M+1):
+        # print('n=%d, m=%d' % (n,m))
+        # print('h[n-m]', h[n-m])
+        # print('x_mirror[m]', x_mirror[m])
+        # print('y[n]', y[n-M])
+        # y[n-M] += h[n-m] * x_mirror[m] # use extrapolated points
+   
+# 'valid' means there is no convolution if signals dont overlap completely
+y = np.convolve(h[::-1], x_mirror, mode='valid') 
 
-for i in range(3):
-    y = np.append(y,0)
+#for i in range(3):
+#    y = np.append(y,0)
  
 ecg_filtered = y
 ecg = x
+ecg_reference = signal.savgol_filter(ecg, 2*M+1, N, deriv=0, delta=1.0, axis=-1, mode='mirror', cval=0.0)
 
-ecg_reference = signal.savgol_filter(ecg, 7, 2, deriv=0, delta=1.0, axis=-1, mode='mirror', cval=0.0)
-
-print(len(t), len(x), len(y))
+print(len(t), len(x), len(y), len(x_mirror))
 
 # TODO: Find low-frequency baseline
 
