@@ -1,4 +1,7 @@
 # Savitzky-Golay: show convolution coeffs on plot
+import numpy as np
+import matplotlib.pyplot as plt
+
 M = 3 # window width is 2M+1
 N = 2 # fitting polynomial degree
 n = 10
@@ -12,5 +15,10 @@ print('polynomial coefficients a =', a)
 h = np.flipud(np.polyval(a, impulse_domain))
 
 # plot impulse polynomial design
-plt.plot(impulse_domain, d, label='impulse sequence')
-plt.plot(impulse_domain, h, '-r', label='Impulse response h')
+plt.plot(impulse_domain, d, 'bo', label='impulse sequence')
+plt.plot(impulse_domain, h, 'r-', label='Impulse response h')
+plt.ylabel('Value')
+plt.xlabel('Sample')
+plt.grid()
+plt.legend()
+plt.show()
