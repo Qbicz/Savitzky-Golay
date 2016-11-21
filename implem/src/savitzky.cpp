@@ -16,7 +16,7 @@ void printHelloMessage()
     std::cout << "||  Welcome to SavGol - tool for processing ECG signal.   ||\n";
     std::cout << "||                                                        ||\n";
     std::cout << "||  What do you want to do?                               ||\n";
-    std::cout << "||  1 -                                                   ||\n";
+    std::cout << "||  1 - Read mitdb100short.txt and print example record   ||\n";
     std::cout << "||  2 -                                                   ||\n";
     std::cout << "||  3 -                                                   ||\n";
     std::cout << "||                                                        ||\n";
@@ -29,13 +29,24 @@ int main()
 {
     printHelloMessage();
 
-    MITDbHandler dataHandler;
+    int decision;
+    while(std::cin >> decision)
+    {
+        if(decision == 0)
+        {
+            return 0;
+        }
+        else if(decision == 1)
+        {
+            MITDbHandler dataHandler;
 
-    //Read data from MIT-BIH (parsed to txt: ../../mit-bih-txt/mitdb100short.txt)
-    std::vector<mitRecord> signals = dataHandler.readMITBHDataFromTxt(MITDBH_FILE);
+            //Read data from MIT-BIH (parsed to txt: ../../mit-bih-txt/mitdb100short.txt)
+            std::vector<mitRecord> signals = dataHandler.readMITBHDataFromTxt(MITDBH_FILE);
 
-    //Print example record
-    mitRecord exampleRecord = signals[77];
-    std::cout <<"Time, MLII, V5\n";
-    std::cout << std::get<0>(exampleRecord) << "," << std::get<1>(exampleRecord) << "," << std::get<2>(exampleRecord) << std::endl;
+            //Print example record
+            mitRecord exampleRecord = signals[77];
+            std::cout <<"Time, MLII, V5\n";
+            std::cout << std::get<0>(exampleRecord) << "," << std::get<1>(exampleRecord) << "," << std::get<2>(exampleRecord) << std::endl;
+        }
+    }
 }
