@@ -13,5 +13,7 @@ SciPy reference:
 http://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.savgol_filter.html
 
 # C++ implementation
-test
+TODO:
+	set key autotile column head zignoruje nam peirwsza linie
+	obczaic jak plotowac dane z CSV ktory mamy (multi column)
 
