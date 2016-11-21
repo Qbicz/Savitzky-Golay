@@ -5,6 +5,7 @@
 #include <sstream>
 
 #define MITDBH_FILE "/home/piotr/Studia/ESDMiT_Savitzky-Golay/mit-bih-txt/mitdb100short.txt"
+#define GNUPLOT_MITDB "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data"
 #define GNUPLOT_COMMAND "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.gn"
 
 void printHelloMessage()
@@ -53,6 +54,10 @@ int main()
             std::cout << std::get<0>(exampleRecord) << "," << std::get<1>(exampleRecord) << "," << std::get<2>(exampleRecord) << std::endl;
         }
         else if(decision == 2)
+        {
+            system(GNUPLOT_MITDB);
+        }
+        else if(decision == 3)
         {
             system(GNUPLOT_COMMAND);
         }
