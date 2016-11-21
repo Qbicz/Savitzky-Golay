@@ -10,6 +10,7 @@
 
 void printHelloMessage()
 {
+    std::cout << "\x1B[2J\x1B[H";
     std::cout << " __________________________________________________________\n";
     std::cout << "||                                                        ||\n";
     std::cout << "||                               /\\                       ||\n";
@@ -24,6 +25,7 @@ void printHelloMessage()
     std::cout << "||  1 - Read mitdb100short.txt and print example record   ||\n";
     std::cout << "||  2 - Plot mitdb100short.txt                            ||\n";
     std::cout << "||  3 - Plot simple function using gnuplot                ||\n";
+    std::cout << "||  4 - Clear the console                                 ||\n";
     std::cout << "||                                                        ||\n";
     std::cout << "||  0 - Exit                                              ||\n";
     std::cout << "||                                                        ||\n";
@@ -35,8 +37,11 @@ int main()
     printHelloMessage();
 
     int decision;
-    while(std::cin >> decision)
+    while(true)
     {
+        std::cout << "> ";
+        std::cin >> decision;
+
         if(decision == 0)
         {
             return 0;
@@ -60,6 +65,10 @@ int main()
         else if(decision == 3)
         {
             system(GNUPLOT_COMMAND);
+        }
+        else if(decision == 4)
+        {
+            printHelloMessage();
         }
     }
 }
