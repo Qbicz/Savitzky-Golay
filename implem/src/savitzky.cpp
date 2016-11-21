@@ -1,14 +1,17 @@
 #include <iostream>
-#include <Eigen/Dense>
+#include "MITDbHandler.h"
 
-using Eigen::MatrixXd;
+#define MITDBH_FILE "/home/piotr/Studia/ESDMiT_Savitzky-Golay/mit-bih-txt/mitdb100short.txt"
+
 int main()
 {
-	MatrixXd m(2,2);
-	m(0,0) = 3;
-	m(1,0) = 2.5;
-	m(0,1) = -1;
-	m(1,1) = m(1,0) + m(0,1);
+    MITDbHandler dataHandler;
 
-	std::cout << m << std::endl;
+    //Read data from MIT-BIH (parsed to txt: ../../mit-bih-txt/mitdb100short.txt)
+    std::vector<mitRecord> signals = dataHandler.readMITBHDataFromTxt(MITDBH_FILE);
+
+    //Print example record
+    mitRecord exampleRecord = signals[77];
+    std::cout <<"Time, MLII, V5\n";
+    std::cout << std::get<0>(exampleRecord) << "," << std::get<1>(exampleRecord) << "," << std::get<2>(exampleRecord) << std::endl;
 }
