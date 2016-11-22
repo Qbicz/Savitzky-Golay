@@ -8,9 +8,14 @@
 #define GNUPLOT_MITDB "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data"
 #define GNUPLOT_COMMAND "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.gn"
 
-void printHelloMessage()
+void clearConsole()
 {
     std::cout << "\x1B[2J\x1B[H";
+}
+
+void printHelloMessage()
+{
+    clearConsole();
     std::cout << " __________________________________________________________\n";
     std::cout << "||                                                        ||\n";
     std::cout << "||                               /\\                       ||\n";
@@ -44,6 +49,7 @@ int main()
 
         if(decision == 0)
         {
+            clearConsole();
             return 0;
         }
         else if(decision == 1)
