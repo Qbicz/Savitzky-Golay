@@ -31,17 +31,36 @@ void MITDbHandler::printMITBHDataFromTxt(const std::string filename)
         std::cout << line << '\n';
     }
 
+    std::cout << "File has: " << getNumberOfRecords(filename) << " records\n";
+
     inputFile.close();
 }
 
-std::vector<mitRecord> MITDbHandler::readMITBHDataFromTxt(const std::string filename)
+int MITDbHandler::getNumberOfRecords(const std::string filename)
 {
+    std::ifstream f(filename);
+    if(!f.is_open())
+    {
+        std::cout << "Unable to open file: " << filename << std::endl;
+        return -1;
+    }
 
+    std::string line;
+    auto records = 0;
+
+    for (int i = 0; std::getline(f, line); ++i, records++)
+        ;
+
+    return records-1;
+}
+
+void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
+{
     std::ifstream inputFile(filename);
     if(!inputFile.is_open())
     {
         std::cout << "Unable to open file: " << filename << std::endl;
-        return std::vector<mitRecord>();
+        return;
     }
 
     //get the first line that contains headers, not the data
@@ -52,18 +71,45 @@ std::vector<mitRecord> MITDbHandler::readMITBHDataFromTxt(const std::string file
     std::istringstream ss;
     std::string line;
 
+    auto numberOfRecords = getNumberOfRecords(filename);
     std::vector<mitRecord> signals;
+    time.resize(numberOfRecords);
+    mlii.resize(numberOfRecords);
+    v5.resize(numberOfRecords);
 
-    while(std::getline(inputFile, line))
+    for(int i = 0; std::getline(inputFile, line); i++)
     {
         ss = std::istringstream(line);
         char comma; // buffer for comma
-        float time, mlii, v5;
-        ss >> time >> comma >> mlii >> comma >> v5;
+        float aTime, aMlii, aV5;
+        ss >> aTime >> comma >> aMlii >> comma >> aV5;
 
-        signals.push_back(std::make_tuple(time, mlii, v5));
+        signals.push_back(std::make_tuple(aTime, aMlii, aV5));
+        time(i) = aTime;
+        mlii(i) = aMlii;
+        v5(i) = aV5;
     }
 
+    //Print example record
+//    mitRecord exampleRecord = signals[77];
+//    std::cout <<"Time, MLII, V5\n";
+//    std::cout << std::get<0>(exampleRecord) << "," << std::get<1>(exampleRecord) << "," << std::get<2>(exampleRecord) << std::endl;
+
     inputFile.close();
-    return signals;
+    return;
+}
+
+Eigen::VectorXf& MITDbHandler::getTime()
+{
+    return time;
+}
+
+Eigen::VectorXf& MITDbHandler::getMlii()
+{
+    return mlii;
+}
+
+Eigen::VectorXf& MITDbHandler::getV5()
+{
+    return v5;
 }
