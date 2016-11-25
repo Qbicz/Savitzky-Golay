@@ -44,44 +44,46 @@ void printHelloMessage()
 // fill()
 // linspaced()
 
+typedef Eigen::VectorXf EigenVector;
+
 int main()
 {
-    printHelloMessage();
-
-    int decision;
-    while(true)
-    {
-        std::cout << "> ";
-        std::cin >> decision;
-
-        if(decision == 0)
-        {
-            clearConsole();
-            return 0;
-        }
-        else if(decision == 1)
-        {
+//    printHelloMessage();
+//
+//    int decision;
+//    while(true)
+//    {
+//        std::cout << "> ";
+//        std::cin >> decision;
+//
+//        if(decision == 0)
+//        {
+//            clearConsole();
+//            return 0;
+//        }
+//        else if(decision == 1)
+//        {
             MITDbHandler dataHandler;
 
             //Read data from MIT-BIH (parsed to txt: ../../mit-bih-txt/mitdb100short.txt)
             dataHandler.readMITBHDataFromTxt(MITDBH_FILE);
 
-            Eigen::VectorXf time;
-            Eigen::VectorXf mlii;
-            Eigen::VectorXf v5;
+            EigenVector time;
+            EigenVector mlii;
+            EigenVector v5;
 
 
             const int M = 3;
             const int N = 2; // for 2nd degree
 
-            Eigen::VectorXf impulseY(2*M+1);
-            Eigen::VectorXf impulseX = Eigen::VectorXf::LinSpaced(2*M+1, -M, M);
+            EigenVector impulseY(2*M+1);
+            EigenVector impulseX = EigenVector::LinSpaced(2*M+1, -M, M);
 
             //initialize with comma initializer
             impulseY << 0,0,0,1,0,0,0;
 
             Eigen::MatrixXf MatrixX(2*M+1, N + 1);
-            Eigen::VectorXf MatrixY = impulseY;
+            EigenVector MatrixY = impulseY;
 
             //polyfit
             for ( size_t nRow = 0; nRow < 2*M+1; nRow++ )
@@ -98,43 +100,69 @@ int main()
             Eigen::MatrixXf MatrixXtX = MatrixXt * MatrixX;
             Eigen::MatrixXf MatrixXtY = MatrixXt * MatrixY;
             Eigen::MatrixXf MatrixXtXInv = MatrixXtX.inverse();
-            Eigen::VectorXf coefficents = MatrixXtXInv * MatrixXtY;
+            EigenVector coefficents = MatrixXtXInv * MatrixXtY;
 
             std::cout << "coefficents::\n" << coefficents.transpose() << std::endl;
             std::cout << "MatrixX::\n" << MatrixX.transpose() << std::endl;
             //do we need to flip it?
-            Eigen::VectorXf valuesAtPoints = coefficents.transpose()*MatrixX.transpose();
+            EigenVector valuesAtPoints = coefficents.transpose()*MatrixX.transpose();
 
             std::cout << "velues at points:\n" <<valuesAtPoints.transpose() << std::endl;;
 
-            Eigen::MatrixXf signal = Eigen::VectorXf::Random(100);
+            Eigen::MatrixXf signal = EigenVector::Random(100);
 //            std::cout << "Signal:" << std::endl << signal << "\n";
+            time = dataHandler.getTime();
+            mlii = dataHandler.getMlii();
+            v5 = dataHandler.getV5();
+            EigenVector ecg;
 
             //generate pre and post signal data
-            Eigen::VectorXf preX = signal.block(0,0,M,1);
-            Eigen::VectorXf postX = signal.block(signal.rows()-M,0,M,1);
-            Eigen::VectorXf mirror(preX.rows() + postX.rows());
-            mirror << preX, postX;
+            EigenVector preX = mlii.block(0,0,M,1);
+            EigenVector postX = mlii.block(mlii.rows()-M,0,M,1);
+//            EigenVector mirror(preX.rows() + postX.rows());
+//            mirror << preX, postX;
+
+            ecg.resize(preX.rows() + mlii.rows() + postX.rows());
+            ecg << preX,mlii,postX;
 
 //            std::cout << "preX:\n" << preX << "\npostX\n" << postX <<std::endl;
+//            std::cout << "sizes:\n" << preX.rows() << "\npostX\n" << postX.rows() <<std::endl;
 //            std::cout << "mirror:\n" << mirror <<std::endl;
 
-            std::cout << "Time:\n" << dataHandler.getTime() << std::endl;
-            std::cout << "MLII:\n" << dataHandler.getMlii() << std::endl;
-            std::cout << "V5:\n" << dataHandler.getV5() << std::endl;
+//            std::cout << "Time:\n" << dataHandler.getTime() << std::endl;
+//            std::cout << "MLII:\n" << dataHandler.getMlii() << std::endl;
+//            std::cout << "V5:\n" << dataHandler.getV5() << std::endl;
 
-        }
-        else if(decision == 2)
-        {
-            system(GNUPLOT_MITDB);
-        }
-        else if(decision == 3)
-        {
-            system(GNUPLOT_COMMAND);
-        }
-        else if(decision == 4)
-        {
-            printHelloMessage();
-        }
-    }
+
+
+            EigenVector y(time.rows());
+
+
+            //TODO: extract function convolve()
+
+            for(auto n = 0; n < 20; n++)
+            {
+                y[n] = 0;
+                for(auto m = n-M; m <= n+M; m++)
+                {
+                    y[n] += valuesAtPoints[n-m+M]*ecg[m+M];
+                }
+            }
+
+            std::cout <<"Computed y:\n" << y << std::endl;
+
+//        }
+//        else if(decision == 2)
+//        {
+//            system(GNUPLOT_MITDB);
+//        }
+//        else if(decision == 3)
+//        {
+//            system(GNUPLOT_COMMAND);
+//        }
+//        else if(decision == 4)
+//        {
+//            printHelloMessage();
+//        }
+//    }
 }
