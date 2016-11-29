@@ -16,25 +16,23 @@ MITDbHandler::MITDbHandler() {
 MITDbHandler::~MITDbHandler() {
 }
 
-bool MITDbHandler::saveSignalToFile(const std::string filename, Eigen::VectorXf& filtered)
+bool MITDbHandler::saveSignalsToFile(const std::string filename)
 {
     std::ofstream outputFile;
     outputFile.open(filename);
     if(outputFile.is_open())
     {
-        std::cout << "Successfully opened" << std::endl;
+        Eigen::MatrixXf data(time.rows(), 5);
+        data << time, mlii, mliiFiltered, v5, v5Filtered ;
 
-        std::cout << "Time: " << time.rows() << " " << time.cols() << "filtered: " << filtered.rows()  << " " << filtered.cols() << std::endl;
-        Eigen::MatrixXf data(filtered.rows(), 4);
-        data << time, mlii, v5, filtered;
-
-        outputFile << "Time[s] MLII[mV] V5[mV] ECG[mV]\n";
-        outputFile << data;
-
-        outputFile << "\n";
+        outputFile << "Time[s] MLII[mV] MLII_Filtered[mV] V5[mV] V5_Filterred[mV]\n";
+        outputFile << data << "\n";
         outputFile.close();
+
+        return true;
     }
 
+    return false;
 }
 
 void MITDbHandler::printMITBHDataFromTxt(const std::string filename)
@@ -57,7 +55,7 @@ void MITDbHandler::printMITBHDataFromTxt(const std::string filename)
     inputFile.close();
 }
 
-int MITDbHandler::getNumberOfRecords(const std::string filename)
+int MITDbHandler::getNumberOfRecords(const std::string& filename)
 {
     std::ifstream f(filename);
     if(!f.is_open())
@@ -73,6 +71,15 @@ int MITDbHandler::getNumberOfRecords(const std::string filename)
         ;
 
     return records-1;
+}
+
+void MITDbHandler::resizeSignalBuffers(int numberOfRecords)
+{
+    time.resize(numberOfRecords);
+    mlii.resize(numberOfRecords);
+    mliiFiltered.resize(numberOfRecords);
+    v5.resize(numberOfRecords);
+    v5Filtered.resize(numberOfRecords);
 }
 
 void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
@@ -92,11 +99,7 @@ void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
     std::istringstream ss;
     std::string line;
 
-    auto numberOfRecords = getNumberOfRecords(filename);
-    std::vector<mitRecord> signals;
-    time.resize(numberOfRecords);
-    mlii.resize(numberOfRecords);
-    v5.resize(numberOfRecords);
+    resizeSignalBuffers(getNumberOfRecords(filename));
 
     for(int i = 0; std::getline(inputFile, line); i++)
     {
@@ -104,15 +107,10 @@ void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
         float aTime, aMlii, aV5;
         ss >> aTime >>   aMlii  >> aV5;
 
-        signals.push_back(std::make_tuple(aTime, aMlii, aV5));
         time(i) = aTime;
         mlii(i) = aMlii;
         v5(i) = aV5;
     }
-
-    mitRecord exampleRecord = signals[0];
-    std::cout <<"Time, MLII, V5\n";
-    std::cout << std::get<0>(exampleRecord) << "," << std::get<1>(exampleRecord) << "," << std::get<2>(exampleRecord) << std::endl;
 
     inputFile.close();
     return;
@@ -131,4 +129,14 @@ Eigen::VectorXf& MITDbHandler::getMlii()
 Eigen::VectorXf& MITDbHandler::getV5()
 {
     return v5;
+}
+
+void MITDbHandler::saveMliiFilterred(const Eigen::VectorXf signal)
+{
+    mliiFiltered = signal;
+}
+
+void MITDbHandler::saveV5Filterred(const Eigen::VectorXf signal)
+{
+    v5Filtered = signal;
 }

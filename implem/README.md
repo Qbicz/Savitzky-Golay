@@ -7,3 +7,5 @@ http://gnuplot.sourceforge.net/demo_5.0/
 TODO:
 class Environment (plot, gui, save to file)
 dane bez przecinkow - latwiej je wtedy odczytac / zapisac
+
+gnupot mozna zrobic set terminal i to zapisuje do pliku automatycznie - mamy z glowy robienie tego w GUI

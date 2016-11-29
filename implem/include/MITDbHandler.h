@@ -12,24 +12,28 @@
 #include <vector>
 #include <Eigen/Dense>
 
-typedef std::tuple<float, float, float> mitRecord;
-
 class MITDbHandler {
 public:
     MITDbHandler();
     virtual ~MITDbHandler();
     void readMITBHDataFromTxt(const std::string filename);
     void printMITBHDataFromTxt(const std::string filename);
-    int getNumberOfRecords(const std::string filename);
+
     Eigen::VectorXf& getTime();
     Eigen::VectorXf& getMlii();
     Eigen::VectorXf& getV5();
-    bool saveSignalToFile(const std::string filename, Eigen::VectorXf& filtered);
+    bool saveSignalsToFile(const std::string filename);
+    void saveMliiFilterred(const Eigen::VectorXf signal);
+    void saveV5Filterred(const Eigen::VectorXf signal);
 private:
-    std::vector<mitRecord> signals;
     Eigen::VectorXf time;
     Eigen::VectorXf mlii;
+    Eigen::VectorXf mliiFiltered;
     Eigen::VectorXf v5;
+    Eigen::VectorXf v5Filtered;
+
+    int getNumberOfRecords(const std::string& filename);
+    void resizeSignalBuffers(int numberOfRecords);
 };
 
 #endif /* INCLUDE_MITDBHANDLER_H_ */

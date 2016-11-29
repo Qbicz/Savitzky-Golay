@@ -1,2 +1,9 @@
 set key autotitle columnhead
-plot filename using 1:2 with lines title 'MLII', filename using 1:4 with lines title 'Filtered MLII'
+
+set term qt 0
+set title "Figure 1";
+plot filename using 1:2 with lines title 'MLII', filename using 1:3 with lines title 'Filtered MLII'; pause mouse close
+
+set term qt 1
+set title "Figure 2";
+plot filename using 1:4 with lines title 'v%', filename using 1:5 with lines title 'Filtered V5'; pause mouse close
