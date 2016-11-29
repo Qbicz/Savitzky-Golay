@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from scipy import signal
 
 def read_datafile(file_name):
-    data = np.loadtxt(file_name, delimiter=',', unpack=True, skiprows=1)
+    data = np.loadtxt(file_name, delimiter=' ', unpack=True, skiprows=1)
     return data
 
 print('Read MIT-BIH data...')    
@@ -13,10 +13,10 @@ data = read_datafile('../mit-bih-txt/mitdb100short.txt')
 
 # short test data - 300 samples
 # time vector
-t = data[0][180:200]
+t = data[0][0:]
 
 # ECG vector
-x = data[1][180:200]
+x = data[1][0:]
 
 # Savitzky-Golay filtering
 M = 3 # window width is 2M+1
@@ -67,13 +67,15 @@ x_mirror = np.concatenate((xfirst, x, xlast))
    
 # 'valid' means there is no convolution if signals dont overlap completely
 y = np.convolve(h[::-1], x_mirror, mode='valid') 
-
+print(y[1:20])
 #for i in range(3):
 #    y = np.append(y,0)
  
 ecg_filtered = y
 ecg = x
 ecg_reference = signal.savgol_filter(ecg, 2*M+1, N, deriv=0, delta=1.0, axis=-1, mode='mirror', cval=0.0)
+
+print('filtered signal ', ecg_filtered[0:100])
 
 print(len(t), len(x), len(y), len(x_mirror))
 
@@ -83,7 +85,7 @@ print(len(t), len(x), len(y), len(x_mirror))
 # plot single heart cycle with 1 QRS
 plt.plot(t, ecg, 'b-', label="ECG")
 plt.plot(t, ecg_filtered, 'g-', label="Savitzky-Golay")
-plt.plot(t, ecg_reference, 'ro', label="Sav-Gol SciPy mirror")
+#plt.plot(t, ecg_reference, 'ro', label="Sav-Gol SciPy mirror")
 plt.ylabel('ECG signal')
 plt.xlabel('Time [s]')
 plt.legend()
