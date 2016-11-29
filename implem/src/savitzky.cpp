@@ -10,6 +10,14 @@
 #define GNUPLOT_MITDB "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data"
 #define GNUPLOT_COMMAND "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.gn"
 
+void plotData(std::string filename)
+{
+    std::string command = "gnuplot -p -e \"filename='";
+    command += filename + "'\" /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data";
+
+    system(command.c_str());
+}
+
 void clearConsole()
 {
     std::cout << "\x1B[2J\x1B[H";
@@ -140,7 +148,7 @@ int main()
 
             //TODO: extract function convolve()
 
-            for(auto n = 0; n < 20; n++)
+            for(auto n = 0; n < time.rows(); n++)
             {
                 y[n] = 0;
                 for(auto m = n-M; m <= n+M; m++)
@@ -149,8 +157,9 @@ int main()
                 }
             }
 
-            std::cout <<"Computed y:\n" << y << std::endl;
-
+//            std::cout <<"Computed y:\n" << y << std::endl;
+            dataHandler.saveSignalToFile("/home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/pliczek.txt", y);
+            plotData("/home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/pliczek.txt");
 //        }
 //        else if(decision == 2)
 //        {

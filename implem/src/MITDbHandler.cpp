@@ -16,6 +16,27 @@ MITDbHandler::MITDbHandler() {
 MITDbHandler::~MITDbHandler() {
 }
 
+bool MITDbHandler::saveSignalToFile(const std::string filename, Eigen::VectorXf& signal)
+{
+    std::ofstream outputFile;
+    outputFile.open(filename);
+    if(outputFile.is_open())
+    {
+        std::cout << "Successfully opened" << std::endl;
+
+        std::cout << "Time: " << time.rows() << " " << time.cols() << "Signal: " << signal.rows()  << " " << signal.cols() << std::endl;
+        Eigen::MatrixXf data(signal.rows(), 2);
+        data << time, signal;
+
+        outputFile << "Time[s] ECG[mV]\n";
+        outputFile << data;
+
+        outputFile << "\n";
+        outputFile.close();
+    }
+
+}
+
 void MITDbHandler::printMITBHDataFromTxt(const std::string filename)
 {
     std::ifstream inputFile(filename);
