@@ -2,7 +2,7 @@
 #include "MITDbHandler.h"
 #include <Eigen/Dense>
 
-
+#include <iomanip>
 #include <cstdlib>
 #include <sstream>
 
@@ -10,8 +10,9 @@
 #define GNUPLOT_MITDB "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data"
 #define GNUPLOT_COMMAND "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.gn"
 
-void plotData(std::string filename)
+void plotOutput(std::string filename)
 {
+    //gnuplot -p -e "filename='$FILENAME'" /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data
     std::string command = "gnuplot -p -e \"filename='";
     command += filename + "'\" /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data";
 
@@ -117,20 +118,16 @@ int main()
 
             std::cout << "velues at points:\n" <<valuesAtPoints.transpose() << std::endl;;
 
-            Eigen::MatrixXf signal = EigenVector::Random(100);
-//            std::cout << "Signal:" << std::endl << signal << "\n";
             time = dataHandler.getTime();
             mlii = dataHandler.getMlii();
             v5 = dataHandler.getV5();
-            EigenVector ecg;
 
             //generate pre and post signal data
             EigenVector preX = mlii.block(0,0,M,1);
             EigenVector postX = mlii.block(mlii.rows()-M,0,M,1);
-//            EigenVector mirror(preX.rows() + postX.rows());
-//            mirror << preX, postX;
 
-            ecg.resize(preX.rows() + mlii.rows() + postX.rows());
+            EigenVector ecg(preX.rows() + mlii.rows() + postX.rows());
+
             ecg << preX,mlii,postX;
 
 //            std::cout << "preX:\n" << preX << "\npostX\n" << postX <<std::endl;
@@ -138,7 +135,7 @@ int main()
 //            std::cout << "mirror:\n" << mirror <<std::endl;
 
 //            std::cout << "Time:\n" << dataHandler.getTime() << std::endl;
-//            std::cout << "MLII:\n" << dataHandler.getMlii() << std::endl;
+            std::cout << "MLII:\n" << dataHandler.getMlii() << std::endl;
 //            std::cout << "V5:\n" << dataHandler.getV5() << std::endl;
 
 
@@ -157,9 +154,9 @@ int main()
                 }
             }
 
-//            std::cout <<"Computed y:\n" << y << std::endl;
+            std::cout <<"Filtered MLII:\n" << y << std::endl;
             dataHandler.saveSignalToFile("/home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/pliczek.txt", y);
-            plotData("/home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/pliczek.txt");
+            plotOutput("/home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/pliczek.txt");
 //        }
 //        else if(decision == 2)
 //        {

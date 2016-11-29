@@ -4,8 +4,6 @@ http://eigen.tuxfamily.org/dox/GettingStarted.html
 Wyświetlanie w GNUPlot
 http://gnuplot.sourceforge.net/demo_5.0/
 
-Usage:
-gnuplot -p -c "script.name" "file.name"
-
-gdzie script.name bedzie przechowywal skrypt ktory dane z bazy wyplotuje
-
+TODO:
+class Environment (plot, gui, save to file)
+dane bez przecinkow - latwiej je wtedy odczytac / zapisac

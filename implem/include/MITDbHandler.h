@@ -24,7 +24,7 @@ public:
     Eigen::VectorXf& getTime();
     Eigen::VectorXf& getMlii();
     Eigen::VectorXf& getV5();
-    bool saveSignalToFile(const std::string filename, Eigen::VectorXf& signal);
+    bool saveSignalToFile(const std::string filename, Eigen::VectorXf& filtered);
 private:
     std::vector<mitRecord> signals;
     Eigen::VectorXf time;

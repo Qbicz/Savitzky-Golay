@@ -16,7 +16,7 @@ MITDbHandler::MITDbHandler() {
 MITDbHandler::~MITDbHandler() {
 }
 
-bool MITDbHandler::saveSignalToFile(const std::string filename, Eigen::VectorXf& signal)
+bool MITDbHandler::saveSignalToFile(const std::string filename, Eigen::VectorXf& filtered)
 {
     std::ofstream outputFile;
     outputFile.open(filename);
@@ -24,11 +24,11 @@ bool MITDbHandler::saveSignalToFile(const std::string filename, Eigen::VectorXf&
     {
         std::cout << "Successfully opened" << std::endl;
 
-        std::cout << "Time: " << time.rows() << " " << time.cols() << "Signal: " << signal.rows()  << " " << signal.cols() << std::endl;
-        Eigen::MatrixXf data(signal.rows(), 2);
-        data << time, signal;
+        std::cout << "Time: " << time.rows() << " " << time.cols() << "filtered: " << filtered.rows()  << " " << filtered.cols() << std::endl;
+        Eigen::MatrixXf data(filtered.rows(), 4);
+        data << time, mlii, v5, filtered;
 
-        outputFile << "Time[s] ECG[mV]\n";
+        outputFile << "Time[s] MLII[mV] V5[mV] ECG[mV]\n";
         outputFile << data;
 
         outputFile << "\n";
@@ -101,9 +101,8 @@ void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
     for(int i = 0; std::getline(inputFile, line); i++)
     {
         ss = std::istringstream(line);
-        char comma; // buffer for comma
         float aTime, aMlii, aV5;
-        ss >> aTime >> comma >> aMlii >> comma >> aV5;
+        ss >> aTime >>   aMlii  >> aV5;
 
         signals.push_back(std::make_tuple(aTime, aMlii, aV5));
         time(i) = aTime;
@@ -111,10 +110,9 @@ void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
         v5(i) = aV5;
     }
 
-    //Print example record
-//    mitRecord exampleRecord = signals[77];
-//    std::cout <<"Time, MLII, V5\n";
-//    std::cout << std::get<0>(exampleRecord) << "," << std::get<1>(exampleRecord) << "," << std::get<2>(exampleRecord) << std::endl;
+    mitRecord exampleRecord = signals[0];
+    std::cout <<"Time, MLII, V5\n";
+    std::cout << std::get<0>(exampleRecord) << "," << std::get<1>(exampleRecord) << "," << std::get<2>(exampleRecord) << std::endl;
 
     inputFile.close();
     return;

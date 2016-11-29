@@ -1,6 +1,2 @@
 set key autotitle columnhead
-#set datafile separator ",'
-plot  filename using 1:2 with lines title 'Filtered ECG'
-
-#gnuplot -p -c "script.name" "file.name"
-#-e "filename='foo.data'" foo.plg
+plot filename using 1:2 with lines title 'MLII', filename using 1:4 with lines title 'Filtered MLII'
