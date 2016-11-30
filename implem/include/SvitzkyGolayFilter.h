@@ -1,22 +1,13 @@
-/*
- * MITDbHandler.h
- *
- *  Created on: Nov 21, 2016
- *      Author: piotr
- */
+#ifndef INCLUDE_SVITZKYGOLAYFILTER_H_
+#define INCLUDE_SVITZKYGOLAYFILTER_H_
 
-#ifndef INCLUDE_MITDBHANDLER_H_
-#define INCLUDE_MITDBHANDLER_H_
+#include "Common.h"
 
-#include <tuple>
-#include <vector>
-#include <Eigen/Dense>
-
-class MITDbHandler {
+class SvitzkyGolayFilter {
 public:
-    MITDbHandler();
-    virtual ~MITDbHandler();
-    void readMITBHDataFromTxt(const std::string filename);
+    SvitzkyGolayFilter();
+    virtual ~SvitzkyGolayFilter();
+    bool readMITBHDataFromTxt(const std::string filename);
     void printMITBHDataFromTxt(const std::string filename);
 
     Eigen::VectorXf& getTime();
@@ -36,4 +27,4 @@ private:
     void resizeSignalBuffers(int numberOfRecords);
 };
 
-#endif /* INCLUDE_MITDBHANDLER_H_ */
+#endif /* INCLUDE_SVITZKYGOLAYFILTER_H_ */

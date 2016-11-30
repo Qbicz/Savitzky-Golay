@@ -6,4 +6,4 @@ plot filename using 1:2 with lines title 'MLII', filename using 1:3 with lines t
 
 set term qt 1
 set title "Figure 2";
-plot filename using 1:4 with lines title 'v%', filename using 1:5 with lines title 'Filtered V5'; pause mouse close
+plot filename using 1:4 with lines title 'V5', filename using 1:5 with lines title 'Filtered V5'; pause mouse close

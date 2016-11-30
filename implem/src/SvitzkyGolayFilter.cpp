@@ -1,22 +1,15 @@
-/*
- * MITDbHandler.cpp
- *
- *  Created on: Nov 21, 2016
- *      Author: piotr
- */
-
-#include "MITDbHandler.h"
+#include <SvitzkyGolayFilter.h>
 #include <sstream>
 #include <fstream>
 #include <iostream>
 
-MITDbHandler::MITDbHandler() {
+SvitzkyGolayFilter::SvitzkyGolayFilter() {
 }
 
-MITDbHandler::~MITDbHandler() {
+SvitzkyGolayFilter::~SvitzkyGolayFilter() {
 }
 
-bool MITDbHandler::saveSignalsToFile(const std::string filename)
+bool SvitzkyGolayFilter::saveSignalsToFile(const std::string filename)
 {
     std::ofstream outputFile;
     outputFile.open(filename);
@@ -35,7 +28,7 @@ bool MITDbHandler::saveSignalsToFile(const std::string filename)
     return false;
 }
 
-void MITDbHandler::printMITBHDataFromTxt(const std::string filename)
+void SvitzkyGolayFilter::printMITBHDataFromTxt(const std::string filename)
 {
     std::ifstream inputFile(filename);
     if(!inputFile.is_open())
@@ -55,7 +48,7 @@ void MITDbHandler::printMITBHDataFromTxt(const std::string filename)
     inputFile.close();
 }
 
-int MITDbHandler::getNumberOfRecords(const std::string& filename)
+int SvitzkyGolayFilter::getNumberOfRecords(const std::string& filename)
 {
     std::ifstream f(filename);
     if(!f.is_open())
@@ -73,7 +66,7 @@ int MITDbHandler::getNumberOfRecords(const std::string& filename)
     return records-1;
 }
 
-void MITDbHandler::resizeSignalBuffers(int numberOfRecords)
+void SvitzkyGolayFilter::resizeSignalBuffers(int numberOfRecords)
 {
     time.resize(numberOfRecords);
     mlii.resize(numberOfRecords);
@@ -82,13 +75,13 @@ void MITDbHandler::resizeSignalBuffers(int numberOfRecords)
     v5Filtered.resize(numberOfRecords);
 }
 
-void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
+bool SvitzkyGolayFilter::readMITBHDataFromTxt(const std::string filename)
 {
     std::ifstream inputFile(filename);
     if(!inputFile.is_open())
     {
         std::cout << "Unable to open file: " << filename << std::endl;
-        return;
+        return false;
     }
 
     //get the first line that contains headers, not the data
@@ -96,14 +89,13 @@ void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
     std::getline(inputFile, header);
 
     //read the data
-    std::istringstream ss;
     std::string line;
 
     resizeSignalBuffers(getNumberOfRecords(filename));
 
     for(int i = 0; std::getline(inputFile, line); i++)
     {
-        ss = std::istringstream(line);
+        std::istringstream ss(line);
         float aTime, aMlii, aV5;
         ss >> aTime >>   aMlii  >> aV5;
 
@@ -113,30 +105,30 @@ void MITDbHandler::readMITBHDataFromTxt(const std::string filename)
     }
 
     inputFile.close();
-    return;
+    return true;
 }
 
-Eigen::VectorXf& MITDbHandler::getTime()
+Eigen::VectorXf& SvitzkyGolayFilter::getTime()
 {
     return time;
 }
 
-Eigen::VectorXf& MITDbHandler::getMlii()
+Eigen::VectorXf& SvitzkyGolayFilter::getMlii()
 {
     return mlii;
 }
 
-Eigen::VectorXf& MITDbHandler::getV5()
+Eigen::VectorXf& SvitzkyGolayFilter::getV5()
 {
     return v5;
 }
 
-void MITDbHandler::saveMliiFilterred(const Eigen::VectorXf signal)
+void SvitzkyGolayFilter::saveMliiFilterred(const Eigen::VectorXf signal)
 {
     mliiFiltered = signal;
 }
 
-void MITDbHandler::saveV5Filterred(const Eigen::VectorXf signal)
+void SvitzkyGolayFilter::saveV5Filterred(const Eigen::VectorXf signal)
 {
     v5Filtered = signal;
 }

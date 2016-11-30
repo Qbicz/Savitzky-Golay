@@ -1,20 +1,15 @@
-#include <iostream>
-#include "MITDbHandler.h"
-#include <Eigen/Dense>
+#include <SvitzkyGolayFilter.h>
+#include "Common.h"
 
-#include <iomanip>
-#include <cstdlib>
-#include <sstream>
-
-#define MITDBH_FILE "/home/piotr/Studia/ESDMiT_Savitzky-Golay/mit-bih-txt/mitdb100short.txt"
+#define MITDBH_FILE "../../mit-bih-txt/mitdb100short.txt"
 #define GNUPLOT_MITDB "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data"
 #define GNUPLOT_COMMAND "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.gn"
 
 void plotOutput(std::string filename)
 {
-    //gnuplot -e "filename='$FILENAME'" /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data
+    //gnuplot -e "filename='$FILENAME'" ../../implem/src/plot.data
     std::string command = "gnuplot -e \"filename='";
-    command += filename + "'\" /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data &";
+    command += filename + "'\" ../../implem/src/plot.data &";
 
     system(command.c_str());
 }
@@ -56,8 +51,6 @@ void printHelloMessage()
 // transpose()
 // fill()
 // linspaced()
-
-typedef Eigen::VectorXf EigenVector;
 
 EigenVector getImpulseResponse(const int range, const int polyfitOrder)
 {
@@ -103,41 +96,63 @@ EigenVector filterSignal(const EigenVector& signal, const int range, const int p
 
     ecg << preX,signal,postX;
 
-    EigenVector mliiFilterred(signal.rows());
+    EigenVector filterred(signal.rows());
 
     for(auto n = 0; n < signal.rows(); n++)
     {
-        mliiFilterred[n] = 0;
+        filterred[n] = 0;
         for(auto m = n-range; m <= n+range; m++)
         {
-            mliiFilterred[n] += impulseResponse[n-m+range]*ecg[m+range];
+            filterred[n] += impulseResponse[n-m+range]*ecg[m+range];
         }
     }
 
-    return mliiFilterred;
+    return filterred;
+}
+
+int is_numeric (const std::string& str)
+{
+    std::istringstream ss(str);
+    int num;
+    ss >> num;      // try to read the number
+    ss >> std::ws;  // eat whitespace after number
+
+    if (!ss.fail() && ss.eof())
+    {
+        return num;  // is-a-number
+    }
+    else
+    {
+        return -1; // not-a-number
+    }
 }
 
 int main()
 {
-//    printHelloMessage();
-//
-//    int decision;
-//    while(true)
-//    {
-//        std::cout << "> ";
-//        std::cin >> decision;
-//
-//        if(decision == 0)
-//        {
-//            clearConsole();
-//            return 0;
-//        }
-//        else if(decision == 1)
-//        {
-            MITDbHandler dataHandler;
+    printHelloMessage();
+
+    while(true)
+    {
+        std::string input;
+        std::cout << "> ";
+        std::cin >> input;
+
+        int decision = is_numeric(input);
+
+        if(decision == 0)
+        {
+            clearConsole();
+            return 0;
+        }
+        else if(decision == 1)
+        {
+            SvitzkyGolayFilter dataHandler;
 
             //Read data from MIT-BIH (parsed to txt: ../../mit-bih-txt/mitdb100short.txt)
-            dataHandler.readMITBHDataFromTxt(MITDBH_FILE);
+            if(!dataHandler.readMITBHDataFromTxt(MITDBH_FILE))
+            {
+                return -1;
+            }
 
             const int M = 3; // half of the range
             const int N = 2; // order of the polyfit
@@ -152,21 +167,26 @@ int main()
             dataHandler.saveMliiFilterred(mliiFilterred);
             dataHandler.saveV5Filterred(v5Filterred);
 
-            dataHandler.saveSignalsToFile("/home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/pliczek.txt");
-            plotOutput("/home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/pliczek.txt");
+            const std::string outputFile = "../../implem/pliczek.txt";
+            dataHandler.saveSignalsToFile(outputFile);
+            plotOutput(outputFile);
 
-//        }
-//        else if(decision == 2)
-//        {
-//            system(GNUPLOT_MITDB);
-//        }
-//        else if(decision == 3)
-//        {
-//            system(GNUPLOT_COMMAND);
-//        }
-//        else if(decision == 4)
-//        {
-//            printHelloMessage();
-//        }
-//    }
+        }
+        else if(decision == 2)
+        {
+            system(GNUPLOT_MITDB);
+        }
+        else if(decision == 3)
+        {
+            system(GNUPLOT_COMMAND);
+        }
+        else if(decision == 4)
+        {
+            printHelloMessage();
+        }
+        else
+        {
+            std::cout << "Unsupported decision. Please insert correct number ;)" << std::endl;
+        }
+    }
 }
