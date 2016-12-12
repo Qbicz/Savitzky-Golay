@@ -24,9 +24,9 @@ Automatyczna numeracja obrazków: obrazek \ref{rys:wzor}.
 \begin{figure}[!htb]
   \begin{center}
     \includegraphics[width=12cm,trim=1.6cm 6.9cm 1.7cm 8.8cm,clip]
-    {img/test.jpg}
+    {img/prototype.png}
   \end{center}
-  \caption{Obrazek testowy}
+  \caption{Wygładzanie metodą Savitzky-Golay z oknem 7 próbek (M=3) i aproksymacją wielomianem N=2 stopnia}
   \label{rys:savitzky_py}
 \end{figure}
 

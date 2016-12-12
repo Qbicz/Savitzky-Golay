@@ -13,10 +13,10 @@ data = read_datafile('../mit-bih-txt/mitdb100short.txt')
 
 # short test data - 300 samples
 # time vector
-t = data[0][0:]
+t = data[0][50:]
 
 # ECG vector
-x = data[1][0:]
+x = data[1][50:]
 
 # Savitzky-Golay filtering
 M = 3 # window width is 2M+1
@@ -85,7 +85,7 @@ print(len(t), len(x), len(y), len(x_mirror))
 # plot single heart cycle with 1 QRS
 plt.plot(t, ecg, 'b-', label="ECG")
 plt.plot(t, ecg_filtered, 'g-', label="Savitzky-Golay")
-#plt.plot(t, ecg_reference, 'ro', label="Sav-Gol SciPy mirror")
+plt.plot(t, ecg_reference, 'ro', label="Sav-Gol SciPy mirror")
 plt.ylabel('ECG signal')
 plt.xlabel('Time [s]')
 plt.legend()
