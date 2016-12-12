@@ -1,0 +1,33 @@
+\section{Algorytm}
+
+Filtr Savitzky-Golay pozwala wygładzić cyfrowy sygnał. Jego działanie opiera się na przybliżaniu lokalnych zestawów sąsiadujących ze sobą punktów wielomianami niskiego rzędu.
+
+Mając dany sygnał x[n], poszukujemy wielomianu
+\begin{equation}
+p(n) = \sum\limits_{k=0}^N a_k n^k
+\end{equation}
+który w otoczeniu $2M+1$ punktów minimalizuje kwadrat błędu aproksymacji
+\begin{equation}
+\epsilon_N = \sum\limits_{n=-M}^M (p(n) - x[n])^2
+\end{equation}
+
+
+
+W praktyce filtr Savitzky-Golay realizuje swoje zadanie obliczając splot kilku aktualnie branych pod uwagę punktów z aproksymacją odpowiedzi impulsowej ...
+
+
+Przebieg filtracji uzyskanej za pomocą prototypu Python przedstawia wykres \ref{rys:savitzky_py}
+
+
+Automatyczna numeracja obrazków: obrazek \ref{rys:wzor}.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \includegraphics[width=12cm,trim=1.6cm 6.9cm 1.7cm 8.8cm,clip]
+    {img/test.jpg}
+  \end{center}
+  \caption{Obrazek testowy}
+  \label{rys:savitzky_py}
+\end{figure}
+
+
