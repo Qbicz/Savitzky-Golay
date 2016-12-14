@@ -11,19 +11,19 @@ który w otoczeniu $2M+1$ punktów minimalizuje kwadrat błędu aproksymacji
 \epsilon_N = \sum\limits_{n=-M}^M (p(n) - x[n])^2
 \end{equation}
 
+W praktyce filtr Savitzky-Golay realizuje swoje zadanie obliczając splot kilku aktualnie branych pod uwagę punktów z wielomianową aproksymacją ciągu z jednostkowym impulsem w środku sekwencji 
 
 
-W praktyce filtr Savitzky-Golay realizuje swoje zadanie obliczając splot kilku aktualnie branych pod uwagę punktów z aproksymacją odpowiedzi impulsowej ...
+
+\section{Prototyp programowy}
+
 
 
 Przebieg filtracji uzyskanej za pomocą prototypu Python przedstawia wykres \ref{rys:savitzky_py}
 
-
-Automatyczna numeracja obrazków: obrazek \ref{rys:wzor}.
-
 \begin{figure}[!htb]
   \begin{center}
-    \includegraphics
+    \includegraphics[scale=0.8]
     {img/prototype.png}
   \end{center}
   \caption{Wygładzanie metodą Savitzky-Golay z oknem 7 próbek (M=3) i aproksymacją wielomianem N=2 stopnia. Porównanie prototypu z funkcją z modułu SciPy.signals}

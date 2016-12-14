@@ -3,6 +3,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
+import time
 
 def read_datafile(file_name):
     data = np.loadtxt(file_name, delimiter=' ', unpack=True, skiprows=1)
@@ -13,14 +14,20 @@ data = read_datafile('../mit-bih-txt/mitdb100short.txt')
 
 # short test data - 300 samples
 # time vector
-t = data[0][50:]
+t = data[0][50:2050]
 
 # ECG vector
-x = data[1][50:]
+x = data[1][50:2050]
 
 # Savitzky-Golay filtering
 M = 3 # window width is 2M+1
 N = 2 # fitting polynomial degree
+
+###
+##
+# measure performance
+start = time.time()
+
 
 # d is impulse sequence
 d = np.concatenate([np.zeros(M), [1], np.zeros(M)])
@@ -70,6 +77,12 @@ y = np.convolve(h[::-1], x_mirror, mode='valid')
 print(y[1:20])
 #for i in range(3):
 #    y = np.append(y,0)
+ 
+#
+##
+### end performance measurement
+end = time.time()
+print('Algorithm took %f seconds.' % (end-start))
  
 ecg_filtered = y
 ecg = x

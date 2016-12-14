@@ -1,6 +1,8 @@
 \section{Wstęp}
 
-Jednym ze sposobów wstępnego przetwarzania sygnału EKG zanim przystąpi się do jego analizy, np. poszukiwania zespołu QRS jest filtr Savitzky-Golay.
+Niniejsza praca jest częścią projektu mającego na celu identyfikację zespołu QRS w sygnale z elektrokardiografu. Sygnał EKG zaraz po zebraniu danych jest zaszumiony
+
+Jednym ze sposobów wstępnego przetwarzania sygnału EKG zanim przystąpi się do jego analizy jest filtr Savitzky-Golay.
 
 W naszej części projektu przygotowujemy prototyp algorytmu z użyciem języka Python, a następnie implementację w języku C++. Użyte w projekcie narzędzia przedstawia tabela \ref{tab:tools}.
 
@@ -12,7 +14,7 @@ W naszej części projektu przygotowujemy prototyp algorytmu z użyciem języka 
   \hline
   Prototyp & Python 3.x & NumPy, Matplotlib \\
   \hline
-  Implementacja & C++ v? & Eigen, gnuplot \\
+  Implementacja & C++ & Eigen, gnuplot \\
   \hline
   \end{tabular}
   \caption{Zestawienie języków programowania i modułów}
