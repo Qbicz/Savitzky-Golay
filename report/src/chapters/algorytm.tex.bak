@@ -25,13 +25,36 @@ gdzie $h$ jest wynikiem interpolacji wielomianem stopnia $N$ sekwencji z jednost
 
 
 \section{Prototyp programu}
-
+\subsection{Użyte moduły}
 Przed przystąpieniem do pracy nad algorytmem, użyliśmy biblioteki \textbf{WFDB} dla środowiska MATLAB, która umożliwiła pobranie danych EKG z bazy MIT-BIH\cite{mit-bih}.
 
 W prototypowej wersji programu użyliśmy modułu \textbf{NumPy} do operacji na macierzach i operacji numerycznych, w tym: interpolacji wielomianowej, sklejania i obracania wektorów. 
 Moduł matplotlib.pyplot posłużył do obrazowania wyników.
 
-Ponieważ odpowiedź impulsowa filtru $h$ jest niezależna od wartości sygnału, wartości wektora $h$ o długości $@m+1$ wystarczy obliczyć raz, a następnie obliczyć wartość konwolucji sygnału z taką maską.
+\subsection{Oprogramowanie algorytmu}
+Ponieważ odpowiedź impulsowa filtru $h$ jest niezależna od wartości sygnału, wartości wektora $h$ o długości $@m+1$ wystarczy obliczyć raz, a następnie obliczyć wartość konwolucji sygnału z taką maską. Wartości maski zostały pokazane na rysunku \ref{rys:impuls}.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \includegraphics[scale=0.8]
+    {img/impulse.png}
+  \end{center}
+  \caption{Odpowiedź impulsowa filtru, uzyskana jako interpolacja wielomianem $N=2$ stopnia serii $2M+1=7$ próbek z jednostkowym impulsem pośrodku}
+  \label{rys:impuls}
+\end{figure}
+
+\subsection{Wartości brzegowe}
+Ponieważ algorytm w każdym punkcie potrzebuje do obliczeń $M$ punktów z lewej i $M$ punktów z prawej strony, należy zdecydować o zachowaniu programu na początku i na końcu spróbkowanego sygnału.
+
+Istnieje kilka możliwych rozwiązań:
+\begin{enumerate}
+\item Zawijanie - algorytm wykorzysta pierwsze $M$ punktów na końcu oraz ostatnie $M$ punktów na początku sygnału
+\item Odbicie - na brzegach zostaną wykorzystane najbliższe punkty, jednak w odwróconej kolejności
+\item Użycie stałej, ustalonej wartości
+\item Najbliższy sąsiad - poza granicami sygnału zostaną dopisane punkty równe pierwszej próbce (na początku) i ostatniej próbce (na końcu)
+\end{enumerate}
+
+W prototypie wybraliśmy rozwiązanie 2. Jeśli ostatnie punkty mają wartości $[6, 7, 8, 9]$, to dopisane poza prawą granicą punkty otrzymają wartości $[8, 7, 6]$.
 
 
 Przebieg filtracji uzyskanej za pomocą prototypu Python przedstawia wykres \ref{rys:savitzky_py}

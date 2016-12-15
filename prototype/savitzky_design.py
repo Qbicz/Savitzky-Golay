@@ -46,7 +46,7 @@ a = np.polyfit(impulse_domain, d, N)
 h = np.flipud(np.polyval(a, impulse_domain))
 y = np.append(y, 0)
 plt.plot(h, 'b-', label="Odpowiedz impulsowa filtru")
-plt.plot(d, 'r.', label="Sekwencja z jednostkowym impulsem")
+plt.plot(d, 'r-', label="Sekwencja z jednostkowym impulsem")
 
 
 # Treatment of first and last points: use 'mirror' extrapolation
@@ -109,6 +109,6 @@ print(len(t), len(x), len(y), len(x_mirror))
 #plt.plot(t, ecg_reference, 'ro', label="Sav-Gol SciPy mirror")
 #plt.ylabel('ECG signal')
 #plt.xlabel('Time [s]')
-plt.legend()
+plt.legend(loc=3)
 plt.title('Odpowiedz impulsowa filtru Savitzky-Golay')
 plt.show()
