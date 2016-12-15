@@ -1,6 +1,6 @@
 \section{Algorytm}
 
-Filtr Savitzky-Golay pozwala wygładzić cyfrowy sygnał. Jego działanie opiera się na przybliżaniu lokalnych zestawów sąsiadujących ze sobą punktów wielomianami niskiego rzędu.
+Filtr Savitzky-Golay pozwala wygładzić cyfrowy sygnał. Jego działanie opiera się na lokalnym przybliżeniu próbek sygnału wielomianami niskiego rzędu \cite{whatissg}.
 
 Mając dany sygnał x[n], poszukujemy wielomianu
 \begin{equation}
@@ -11,11 +11,24 @@ który w otoczeniu $2M+1$ punktów minimalizuje kwadrat błędu aproksymacji
 \epsilon_N = \sum\limits_{n=-M}^M (p(n) - x[n])^2
 \end{equation}
 
-W praktyce filtr Savitzky-Golay realizuje swoje zadanie obliczając splot kilku aktualnie branych pod uwagę punktów z wielomianową aproksymacją ciągu z jednostkowym impulsem w środku sekwencji 
+Wtedy dla próbki centralnej pośród $2M+1$ punktów (ma ona indeks $n=0$) wartość odfiltrowanego sygnału przyjmuje
+\begin{equation}
+y[0] = p(0) = a_0
+\end{equation}
+
+W praktyce filtr Savitzky-Golay realizuje swoje zadanie obliczając splot kilku aktualnie branych pod uwagę punktów z wielomianową aproksymacją ciągu z jednostkowym impulsem w środku sekwencji.
+\begin{equation}
+y[n] = \sum\limits_{m=n-M}^{n+M} h[n-m] x[m]
+\end{equation}
+gdzie $h$ jest wynikiem interpolacji wielomianem stopnia $N$ sekwencji z jednostkowym impulsem, np. $[0, 0, 0, 1, 0, 0, 0]$ dla $M=3$.
 
 
 
-\section{Prototyp programowy}
+\section{Prototyp programu}
+
+Przed przystąpieniem do pracy nad algorytmem, użyliśmy biblioteki \textbf{WFDB} dla środowiska MATLAB, która umożliwiła pobranie danych EKG z bazy MIT-BIH\cite{mit-bih}.
+
+W prototypowej wersji programu użyliśmy modułu \textbf{NumPy} do operacji na macierzach i operacji numerycznych, w tym: interpolacji wielomianowej, sklejania i obracania wektorów. 
 
 
 
@@ -29,5 +42,7 @@ Przebieg filtracji uzyskanej za pomocą prototypu Python przedstawia wykres \ref
   \caption{Wygładzanie metodą Savitzky-Golay z oknem 7 próbek (M=3) i aproksymacją wielomianem N=2 stopnia. Porównanie prototypu z funkcją z modułu SciPy.signals}
   \label{rys:savitzky_py}
 \end{figure}
+
+Aktualny kod dostępny w repozytorium https://github.com/Qbicz/Savitzky-Golay
 
 

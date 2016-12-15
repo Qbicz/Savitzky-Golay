@@ -1,6 +1,6 @@
 \section{Wstęp}
 
-Niniejsza praca jest częścią projektu mającego na celu identyfikację zespołu QRS w sygnale z elektrokardiografu. Sygnał EKG zaraz po zebraniu danych jest zaszumiony
+Niniejsza praca jest częścią projektu mającego na celu identyfikację zespołu QRS w sygnale z elektrokardiografu. Sygnał EKG zaraz po zebraniu danych jest zaszumiony i wymaga wygładzenia oraz usunięcia zakłóceń. Zakłócenia takie jak pojedyncze ruchy pacjenta trudno wyeliminować bez posiadania dodatkowej wiedzy na temat jego zachowania podczas pomiaru. Możliwe jest jednak odfiltrowanie szumu niskiej częstotliwości pochodzącego od ruchów klatki piersiowej podczas oddychania.
 
 Jednym ze sposobów wstępnego przetwarzania sygnału EKG zanim przystąpi się do jego analizy jest filtr Savitzky-Golay.
 
@@ -18,5 +18,5 @@ W naszej części projektu przygotowujemy prototyp algorytmu z użyciem języka 
   \hline
   \end{tabular}
   \caption{Zestawienie języków programowania i modułów}
-  \label{tab:tabela1}
+  \label{tab:tools}
 \end{table}

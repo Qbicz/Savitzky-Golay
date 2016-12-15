@@ -40,6 +40,14 @@ h = np.flipud(np.polyval(a, impulse_domain))
 # TODO: perform a convolution from n-M to n+M of sum( h[n-m] * x[n])
 y = []
 #print(y)
+n = 5
+impulse_domain = np.arange(n-M,n+M+1)
+a = np.polyfit(impulse_domain, d, N)
+h = np.flipud(np.polyval(a, impulse_domain))
+y = np.append(y, 0)
+plt.plot(h, 'b-', label="Odpowiedz impulsowa filtru")
+plt.plot(d, 'r.', label="Sekwencja z jednostkowym impulsem")
+
 
 # Treatment of first and last points: use 'mirror' extrapolation
 xfirst = np.flipud(x[1:M+1])
@@ -96,10 +104,11 @@ print(len(t), len(x), len(y), len(x_mirror))
 
 
 # plot single heart cycle with 1 QRS
-plt.plot(t, ecg, 'b-', label="ECG")
-plt.plot(t, ecg_filtered, 'g-', label="Savitzky-Golay")
-plt.plot(t, ecg_reference, 'ro', label="Sav-Gol SciPy mirror")
-plt.ylabel('ECG signal')
-plt.xlabel('Time [s]')
+#plt.plot(t, ecg, 'b-', label="ECG")
+#plt.plot(t, ecg_filtered, 'g-', label="Savitzky-Golay")
+#plt.plot(t, ecg_reference, 'ro', label="Sav-Gol SciPy mirror")
+#plt.ylabel('ECG signal')
+#plt.xlabel('Time [s]')
 plt.legend()
+plt.title('Odpowiedz impulsowa filtru Savitzky-Golay')
 plt.show()
