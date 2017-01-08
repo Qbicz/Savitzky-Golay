@@ -1,12 +1,12 @@
-#ifndef INCLUDE_SVITZKYGOLAYFILTER_H_
-#define INCLUDE_SVITZKYGOLAYFILTER_H_
+#ifndef INCLUDE_SAVITZKYGOLAYFILTER_H_
+#define INCLUDE_SAVITZKYGOLAYFILTER_H_
 
 #include "Common.h"
 
-class SvitzkyGolayFilter {
+class SavitzkyGolayFilter {
 public:
-    SvitzkyGolayFilter();
-    virtual ~SvitzkyGolayFilter();
+    SavitzkyGolayFilter();
+    virtual ~SavitzkyGolayFilter();
     bool readMITBHDataFromTxt(const std::string filename);
     void printMITBHDataFromTxt(const std::string filename);
 
@@ -27,4 +27,4 @@ private:
     void resizeSignalBuffers(int numberOfRecords);
 };
 
-#endif /* INCLUDE_SVITZKYGOLAYFILTER_H_ */
+#endif /* INCLUDE_SAVITZKYGOLAYFILTER_H_ */

@@ -1,9 +1,8 @@
-#include <SvitzkyGolayFilter.h>
+#include <SavitzkyGolayFilter.h>
 #include "Common.h"
+#include <ctime>
 
 #define MITDBH_FILE "../../mit-bih-txt/mitdb100short.txt"
-#define GNUPLOT_MITDB "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.data"
-#define GNUPLOT_COMMAND "gnuplot -p -c /home/piotr/Studia/ESDMiT_Savitzky-Golay/implem/src/plot.gn"
 
 void plotOutput(std::string filename)
 {
@@ -21,6 +20,11 @@ void clearConsole()
 
 void printHelloMessage()
 {
+    std::vector<std::string> filenames;
+    filenames.push_back("plik100.txt");
+    filenames.push_back("plik200.txt");
+    auto filteredFiles = filenames.size();
+
     clearConsole();
     std::cout << " ___________________________________________________________\n";
     std::cout << "||                                                         ||\n";
@@ -33,18 +37,24 @@ void printHelloMessage()
     std::cout << "||  Welcome to SavGol - tool for processing ECG signal.    ||\n";
     std::cout << "||                                                         ||\n";
     std::cout << "||  What do you want to do?                                ||\n";
-    std::cout << "||  1 - Read mitdb100short.txt and print using Eigen types ||\n";
-    std::cout << "||  2 - Plot mitdb100short.txt                             ||\n";
-    std::cout << "||  3 - Plot simple function using gnuplot                 ||\n";
-    std::cout << "||  4 - Clear the console                                  ||\n";
-    std::cout << "||  5 - Save to file as png                                ||\n";
+    std::cout << "||  1 - Read .txt data and smooth it                       ||\n";
+    std::cout << "||  2 - Plot .txt data                                     ||\n";
+    std::cout << "||  3 - Clear the console                                  ||\n";
+    std::cout << "||  4 - Save to file as .png                               ||\n";
     std::cout << "||                                                         ||\n";
-    std::cout << "||                                                         ||\n";
-    std::cout << "||                                                         ||\n";
+    std::cout << "||  Inserted files:                                        ||\n";
+
+    const auto LINE_WIDTH = 51;
+    for(size_t i = 0; i < filteredFiles; i++)
+    {
+        std::cout << "||  [" << i << "] " << filenames[i] << std::string(LINE_WIDTH-filenames[i].length(), ' ') << "||\n";
+    }
+
     std::cout << "||                                                         ||\n";
     std::cout << "||  0 - Exit                                               ||\n";
     std::cout << "||                                                         ||\n";
     std::cout << "||_________________________________________________________||\n";
+
 }
 
 //jakie funkcje w eigenie przydante:
@@ -127,66 +137,102 @@ int is_numeric (const std::string& str)
     }
 }
 
-int main()
+int processData(std::string inputFile, std::string outputFile, bool outputPlotEnabled)
 {
-    printHelloMessage();
+    std::cout << "Following arguments provided:\n";
+    std::cout << "Input file: " << inputFile << "\n";
+    std::cout << "Output file: " << outputFile << "\n";
+    std::cout << "Output plot: " << (outputPlotEnabled ? "enabled\n" : "disabled\n");
 
-    while(true)
+    SavitzkyGolayFilter dataHandler;
+
+    clock_t begin = clock();
+
+    if(!dataHandler.readMITBHDataFromTxt(inputFile))
     {
-        std::string input;
-        std::cout << "> ";
-        std::cin >> input;
+        return -1;
+    }
 
-        int decision = is_numeric(input);
+    const int M = 3; // half of the range
+    const int N = 2; // order of the polyfit
 
-        if(decision == 0)
+    EigenVector time = dataHandler.getTime();
+    EigenVector mlii = dataHandler.getMlii();
+    EigenVector v5 = dataHandler.getV5();
+
+    EigenVector mliiFilterred = filterSignal(mlii, M, N);
+    EigenVector v5Filterred = filterSignal(v5, M, N);
+
+    dataHandler.saveMliiFilterred(mliiFilterred);
+    dataHandler.saveV5Filterred(v5Filterred);
+
+    dataHandler.saveSignalsToFile(outputFile);
+
+    clock_t end = clock();
+
+    std::cout << "Elapsed time: " << 1000 * ((double)(end - begin) / CLOCKS_PER_SEC) << " [ms]\n";
+
+    if(outputPlotEnabled)
+    {
+        plotOutput(outputFile);
+    }
+
+    return 0;
+}
+
+int main(int argc, char** argv)
+{
+    if(1 == argc)
+    {
+        printHelloMessage();
+
+        while(true)
         {
-            clearConsole();
-            return 0;
-        }
-        else if(decision == 1)
-        {
-            SvitzkyGolayFilter dataHandler;
+            std::string input;
+            std::cout << "> ";
+            std::cin >> input;
 
-            //Read data from MIT-BIH (parsed to txt: ../../mit-bih-txt/mitdb100short.txt)
-            if(!dataHandler.readMITBHDataFromTxt(MITDBH_FILE))
+            int decision = is_numeric(input);
+
+            if(decision == 0)
             {
-                return -1;
+                clearConsole();
+                return 0;
             }
+            else if(decision == 1)
+            {
+                SavitzkyGolayFilter dataHandler;
 
-            const int M = 3; // half of the range
-            const int N = 2; // order of the polyfit
+                //Read data from MIT-BIH (parsed to txt: ../../mit-bih-txt/mitdb100short.txt)
+                std::string fileToRead;
+                std::cout << "Insert filename: ";
+                std::cin >> fileToRead;
 
-            EigenVector time = dataHandler.getTime();
-            EigenVector mlii = dataHandler.getMlii();
-            EigenVector v5 = dataHandler.getV5();
-
-            EigenVector mliiFilterred = filterSignal(mlii, M, N);
-            EigenVector v5Filterred = filterSignal(v5, M, N);
-
-            dataHandler.saveMliiFilterred(mliiFilterred);
-            dataHandler.saveV5Filterred(v5Filterred);
-
-            const std::string outputFile = "../../implem/pliczek.txt";
-            dataHandler.saveSignalsToFile(outputFile);
-            plotOutput(outputFile);
-
+                const std::string outputFile = "../../implem/output/pliczek.txt";
+                processData(fileToRead, outputFile, true);
+            }
+            else if(decision == 2)
+            {
+                //plot
+            }
+            else if(decision == 3)
+            {
+                printHelloMessage();
+            }
+            else
+            {
+                std::cout << "Unsupported decision. Please insert correct number ;)" << std::endl;
+            }
         }
-        else if(decision == 2)
-        {
-            system(GNUPLOT_MITDB);
-        }
-        else if(decision == 3)
-        {
-            system(GNUPLOT_COMMAND);
-        }
-        else if(decision == 4)
-        {
-            printHelloMessage();
-        }
-        else
-        {
-            std::cout << "Unsupported decision. Please insert correct number ;)" << std::endl;
-        }
+    }
+    else if (4 == argc)
+    {
+        //run from command line in format:
+        //SavGol inputFile outputFile [plot]
+        std::string inputFile = argv[1];
+        std::string outputFile = argv[2];
+        bool outputPlotEnabled = "plot" == std::string(argv[3]);
+
+        processData(inputFile, outputFile, outputPlotEnabled);
     }
 }

@@ -1,15 +1,15 @@
-#include <SvitzkyGolayFilter.h>
+#include <SavitzkyGolayFilter.h>
 #include <sstream>
 #include <fstream>
 #include <iostream>
 
-SvitzkyGolayFilter::SvitzkyGolayFilter() {
+SavitzkyGolayFilter::SavitzkyGolayFilter() {
 }
 
-SvitzkyGolayFilter::~SvitzkyGolayFilter() {
+SavitzkyGolayFilter::~SavitzkyGolayFilter() {
 }
 
-bool SvitzkyGolayFilter::saveSignalsToFile(const std::string filename)
+bool SavitzkyGolayFilter::saveSignalsToFile(const std::string filename)
 {
     std::ofstream outputFile;
     outputFile.open(filename);
@@ -28,7 +28,7 @@ bool SvitzkyGolayFilter::saveSignalsToFile(const std::string filename)
     return false;
 }
 
-void SvitzkyGolayFilter::printMITBHDataFromTxt(const std::string filename)
+void SavitzkyGolayFilter::printMITBHDataFromTxt(const std::string filename)
 {
     std::ifstream inputFile(filename);
     if(!inputFile.is_open())
@@ -48,7 +48,7 @@ void SvitzkyGolayFilter::printMITBHDataFromTxt(const std::string filename)
     inputFile.close();
 }
 
-int SvitzkyGolayFilter::getNumberOfRecords(const std::string& filename)
+int SavitzkyGolayFilter::getNumberOfRecords(const std::string& filename)
 {
     std::ifstream f(filename);
     if(!f.is_open())
@@ -66,7 +66,7 @@ int SvitzkyGolayFilter::getNumberOfRecords(const std::string& filename)
     return records-1;
 }
 
-void SvitzkyGolayFilter::resizeSignalBuffers(int numberOfRecords)
+void SavitzkyGolayFilter::resizeSignalBuffers(int numberOfRecords)
 {
     time.resize(numberOfRecords);
     mlii.resize(numberOfRecords);
@@ -75,7 +75,7 @@ void SvitzkyGolayFilter::resizeSignalBuffers(int numberOfRecords)
     v5Filtered.resize(numberOfRecords);
 }
 
-bool SvitzkyGolayFilter::readMITBHDataFromTxt(const std::string filename)
+bool SavitzkyGolayFilter::readMITBHDataFromTxt(const std::string filename)
 {
     std::ifstream inputFile(filename);
     if(!inputFile.is_open())
@@ -108,27 +108,27 @@ bool SvitzkyGolayFilter::readMITBHDataFromTxt(const std::string filename)
     return true;
 }
 
-Eigen::VectorXf& SvitzkyGolayFilter::getTime()
+Eigen::VectorXf& SavitzkyGolayFilter::getTime()
 {
     return time;
 }
 
-Eigen::VectorXf& SvitzkyGolayFilter::getMlii()
+Eigen::VectorXf& SavitzkyGolayFilter::getMlii()
 {
     return mlii;
 }
 
-Eigen::VectorXf& SvitzkyGolayFilter::getV5()
+Eigen::VectorXf& SavitzkyGolayFilter::getV5()
 {
     return v5;
 }
 
-void SvitzkyGolayFilter::saveMliiFilterred(const Eigen::VectorXf signal)
+void SavitzkyGolayFilter::saveMliiFilterred(const Eigen::VectorXf signal)
 {
     mliiFiltered = signal;
 }
 
-void SvitzkyGolayFilter::saveV5Filterred(const Eigen::VectorXf signal)
+void SavitzkyGolayFilter::saveV5Filterred(const Eigen::VectorXf signal)
 {
     v5Filtered = signal;
 }
