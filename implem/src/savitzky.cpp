@@ -66,9 +66,9 @@ EigenVector getImpulseResponse(const int range, const int polyfitOrder)
 {
     EigenVector impulseY(2*range+1);
     EigenVector impulseX = EigenVector::LinSpaced(2*range+1, -range, range);
+    EigenVector zeroVec = EigenVector::Zero(range);
 
-    //initialize with comma initializer
-    impulseY << 0,0,0,1,0,0,0;
+    impulseY << zeroVec,1,zeroVec;
 
     Eigen::MatrixXf MatrixX(2*range+1, polyfitOrder + 1);
     EigenVector MatrixY = impulseY;
