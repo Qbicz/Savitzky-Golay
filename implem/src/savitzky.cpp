@@ -1,6 +1,7 @@
 #include <SavitzkyGolayFilter.h>
 #include "Common.h"
 #include <ctime>
+#include <cstdlib>
 
 #define MITDBH_FILE "../../mit-bih-txt/mitdb100short.txt"
 
@@ -8,6 +9,7 @@ void plotOutput(std::string filename)
 {
     //gnuplot -e "filename='$FILENAME'" ../../implem/src/plot.data
     std::string command = "gnuplot -e \"filename='";
+
     command += filename + "'\" ../../implem/src/plot.data &";
 
     system(command.c_str());
@@ -137,11 +139,27 @@ int is_numeric (const std::string& str)
     }
 }
 
-int processData(std::string inputFile, std::string outputFile, bool outputPlotEnabled)
+void printUsage()
+{
+    std::cout << "Usage:\n";
+    std::cout << "./SavGol.o -i file -o file [-n N] [-m M] [plot]\n";
+    std::cout << "Options:\n";
+    std::cout << " --input, -i file  : name of the input file\n";
+    std::cout << " --output, -o file : name of the output file\n";
+    std::cout << " --plot, -p        : plot filtered signal at the end; default: disabled\n";
+    std::cout << " -n N              : half of the filtering range; default: 2\n";
+    std::cout << " -m M              : half of the filtering range; default: 5\n";
+    std::cout << "Example:\n";
+    std::cout << "./SavGol.o -i ../../mit-bih-txt/mitdb100.txt -o ../output/out_mitdb100.txt -n 2 -m 100\n";
+}
+
+int processData(const std::string inputFile, const std::string outputFile, const int N, const int M, const bool outputPlotEnabled)
 {
     std::cout << "Following arguments provided:\n";
     std::cout << "Input file: " << inputFile << "\n";
     std::cout << "Output file: " << outputFile << "\n";
+    std::cout << "N - polynomial order: " << N << "\n";
+    std::cout << "M - half of the range: " << M << "\n";
     std::cout << "Output plot: " << (outputPlotEnabled ? "enabled\n" : "disabled\n");
 
     SavitzkyGolayFilter dataHandler;
@@ -152,9 +170,6 @@ int processData(std::string inputFile, std::string outputFile, bool outputPlotEn
     {
         return -1;
     }
-
-    const int M = 3; // half of the range
-    const int N = 2; // order of the polyfit
 
     EigenVector time = dataHandler.getTime();
     EigenVector mlii = dataHandler.getMlii();
@@ -182,57 +197,41 @@ int processData(std::string inputFile, std::string outputFile, bool outputPlotEn
 
 int main(int argc, char** argv)
 {
-    if(1 == argc)
+    bool plotEnabled = false;
+    std::string inputFile = "";
+    std::string outputFile = "";
+    int N = 2;
+    int M = 5;
+
+    for(auto i = 0; i < argc; i++)
     {
-        printHelloMessage();
-
-        while(true)
+        std::string argument = argv[i];
+        if ((argument == "-i" || argument == "--input") && (i < argc))
         {
-            std::string input;
-            std::cout << "> ";
-            std::cin >> input;
-
-            int decision = is_numeric(input);
-
-            if(decision == 0)
-            {
-                clearConsole();
-                return 0;
-            }
-            else if(decision == 1)
-            {
-                SavitzkyGolayFilter dataHandler;
-
-                //Read data from MIT-BIH (parsed to txt: ../../mit-bih-txt/mitdb100short.txt)
-                std::string fileToRead;
-                std::cout << "Insert filename: ";
-                std::cin >> fileToRead;
-
-                const std::string outputFile = "../../implem/output/pliczek.txt";
-                processData(fileToRead, outputFile, true);
-            }
-            else if(decision == 2)
-            {
-                //plot
-            }
-            else if(decision == 3)
-            {
-                printHelloMessage();
-            }
-            else
-            {
-                std::cout << "Unsupported decision. Please insert correct number ;)" << std::endl;
-            }
+            inputFile = argv[++i];
+        }
+        else if ((argument == "-o" || argument == "--output") && (i < argc))
+        {
+            outputFile = argv[++i];
+        }
+        else if ((argument == "-m") && (i < argc))
+        {
+            M = atoi(argv[++i]);
+        }
+        else if ((argument == "-n") && (i < argc))
+        {
+            N = atoi(argv[++i]);
+        }
+        else if (argument == "--plot" || argument == "-p")
+        {
+            plotEnabled = true;
+        }
+        else if (argc < 5)
+        {
+            printUsage();
+            exit(1);
         }
     }
-    else if (4 == argc)
-    {
-        //run from command line in format:
-        //SavGol inputFile outputFile [plot]
-        std::string inputFile = argv[1];
-        std::string outputFile = argv[2];
-        bool outputPlotEnabled = "plot" == std::string(argv[3]);
 
-        processData(inputFile, outputFile, outputPlotEnabled);
-    }
+    processData(inputFile, outputFile, N, M, plotEnabled);
 }

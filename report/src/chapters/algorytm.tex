@@ -16,7 +16,7 @@ Wtedy dla próbki centralnej pośród $2M+1$ punktów (ma ona indeks $n=0$) wart
 y[0] = p(0) = a_0
 \end{equation}
 
-W praktyce filtr Savitzky-Golay realizuje swoje zadanie obliczając splot kilku aktualnie branych pod uwagę punktów z wielomianową aproksymacją ciągu z jednostkowym impulsem w środku sekwencji.
+W praktyce filtr Savitzky-Golay realizuje swoje zadanie obliczając splot 2M+1 aktualnie branych pod uwagę punktów z wielomianową aproksymacją ciągu z jednostkowym impulsem w środku sekwencji.
 \begin{equation}
 y[n] = \sum\limits_{m=n-M}^{n+M} h[n-m] x[m]
 \end{equation}

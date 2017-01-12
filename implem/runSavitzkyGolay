@@ -1,6 +1,1 @@
-#cd build && ./SavGol.o inputFile outputFile [plot]
-#    - inputFile  - name of the input file
-#    - outputFile - name of the output file
-#    - plot       - when you want to plot output
-#Example:
-cd build && ./SavGol.o ../../mit-bih-txt/mitdb100.txt ../output/out_mitdb100.txt plot
+cd build && ./SavGol.o -i ../../mit-bih-txt/mitdb100.txt -o ../output/out_mitdb100.txt -n 2 -m 100 -p
