@@ -16,6 +16,11 @@
 \usepackage{subcaption}
 \usepackage{epstopdf}
 \usepackage{indentfirst}
+%Piotrek added:
+\usepackage[titletoc,title]{appendix}
+\usepackage{listings}
+\usepackage{float}
+
 
 \geometry{
  	a4paper, 
@@ -59,14 +64,19 @@
 \begin{document}
  
 \input{spr_titlepage.tex}
+
+\tableofcontents
+
 \include{chapters/wstep}
 \include{chapters/algorytm}
+\include{chapters/prototyp}
 \include{chapters/implementacja}
-
-Aktualny kod dostępny w repozytorium https://github.com/Qbicz/Savitzky-Golay
 
 \bibliographystyle{IEEEtran}
 \bibliography{bib/Bibliografia}
 
+\begin{appendices}
+\include{chapters/how_to} 
+\end{appendices}
 \end{document}
 

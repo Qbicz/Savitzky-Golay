@@ -164,8 +164,6 @@ int processData(const std::string inputFile, const std::string outputFile, const
 
     SavitzkyGolayFilter dataHandler;
 
-    clock_t begin = clock();
-
     if(!dataHandler.readMITBHDataFromTxt(inputFile))
     {
         return -1;
@@ -174,6 +172,8 @@ int processData(const std::string inputFile, const std::string outputFile, const
     EigenVector time = dataHandler.getTime();
     EigenVector mlii = dataHandler.getMlii();
     EigenVector v5 = dataHandler.getV5();
+
+    clock_t begin = clock();
 
     EigenVector mliiFilterred = filterSignal(mlii, M, N);
     EigenVector v5Filterred = filterSignal(v5, M, N);

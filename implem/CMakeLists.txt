@@ -5,7 +5,7 @@
 cmake_minimum_required(VERSION 2.8.9)
 project(STEGANO)
 
-set(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
+set(CMAKE_CXX_FLAGS "-Ofast -Wall -std=c++11")
 
 #Bring the headers
 include_directories(include)

@@ -1,4 +1,7 @@
+#!/usr/bin/python
+
 # Savitzky-Golay design according to Ronald W. Schafer "What is a SG filter?"
+
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,17 +13,17 @@ def read_datafile(file_name):
     return data
 
 print('Read MIT-BIH data...')    
-data = read_datafile('../mit-bih-txt/mitdb100short.txt')
+data = read_datafile('../mit-bih-txt/mitdb100.txt')
 
 # short test data - 300 samples
 # time vector
-t = data[0][50:2050]
+t = data[0][:]
 
 # ECG vector
-x = data[1][50:2050]
+x = data[1][:]
 
 # Savitzky-Golay filtering
-M = 3 # window width is 2M+1
+M = 10 # window width is 2M+1
 N = 2 # fitting polynomial degree
 
 ###
@@ -45,8 +48,8 @@ impulse_domain = np.arange(n-M,n+M+1)
 a = np.polyfit(impulse_domain, d, N)
 h = np.flipud(np.polyval(a, impulse_domain))
 y = np.append(y, 0)
-plt.plot(h, 'b-', label="Odpowiedz impulsowa filtru")
-plt.plot(d, 'r-', label="Sekwencja z jednostkowym impulsem")
+#plt.plot(h, 'b-', label="Odpowiedz impulsowa filtru")
+#plt.plot(d, 'r-', label="Sekwencja z jednostkowym impulsem")
 
 
 # Treatment of first and last points: use 'mirror' extrapolation
@@ -94,8 +97,11 @@ print('Algorithm took %f seconds.' % (end-start))
  
 ecg_filtered = y
 ecg = x
-ecg_reference = signal.savgol_filter(ecg, 2*M+1, N, deriv=0, delta=1.0, axis=-1, mode='mirror', cval=0.0)
 
+start = time.time()
+ecg_reference = signal.savgol_filter(ecg, 2*M+1, N, deriv=0, delta=1.0, axis=-1, mode='mirror', cval=0.0)
+end = time.time()
+print('Refereook %f seconds.' % (end-start))
 print('filtered signal ', ecg_filtered[0:100])
 
 print(len(t), len(x), len(y), len(x_mirror))
@@ -107,8 +113,25 @@ print(len(t), len(x), len(y), len(x_mirror))
 #plt.plot(t, ecg, 'b-', label="ECG")
 #plt.plot(t, ecg_filtered, 'g-', label="Savitzky-Golay")
 #plt.plot(t, ecg_reference, 'ro', label="Sav-Gol SciPy mirror")
-#plt.ylabel('ECG signal')
-#plt.xlabel('Time [s]')
+
+
+
+
+
+
+#Here we compare with implementation
+
+implem_data = read_datafile("out_mitdb100_implem_aligned.txt")
+implem_ecg = implem_data[2][:]
+
+print(len(implem_ecg))
+print(len(ecg))
+
+plt.plot(t, ecg_reference, 'g-', label="Python prototype")
+plt.plot(t, implem_ecg, 'r-', label="C++ implementation")
+
+plt.ylabel('ECG signal')
+plt.xlabel('Time [s]')
 plt.legend(loc=3)
-plt.title('Odpowiedz impulsowa filtru Savitzky-Golay')
+plt.title('Porownanie filtracji Savitzky-Golay')
 plt.show()

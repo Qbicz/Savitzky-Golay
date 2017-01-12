@@ -1,1 +1,1 @@
-cd build && ./SavGol.o -i ../../mit-bih-txt/mitdb100.txt -o ../output/out_mitdb100.txt -n 2 -m 100 -p
+cd build && ./SavGol.o -i ../../mit-bih-txt/mitdb100.txt -o ../output/out_mitdb100.txt -n 2 -m 100 -p ; cd ../
