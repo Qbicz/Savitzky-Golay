@@ -31,7 +31,7 @@ Istnieje kilka możliwych rozwiązań:
 W prototypie wybraliśmy rozwiązanie 2. Jeśli ostatnie punkty mają wartości $[6, 7, 8, 9]$, to dopisane poza prawą granicą punkty otrzymają wartości $[8, 7, 6]$.
 
 
-Przebieg filtracji zakłóceń o wysokiej częstotliwości uzyskanej za pomocą prototypu Python przedstawia wykres \ref{rys:savitzky_py}
+Przebieg filtracji zakłóceń o wysokiej częstotliwości uzyskanej za pomocą prototypu Python przedstawia wykres \ref{rys:savitzky_py}.
 
 \begin{figure}[!htb]
   \begin{center}
@@ -40,4 +40,17 @@ Przebieg filtracji zakłóceń o wysokiej częstotliwości uzyskanej za pomocą 
   \end{center}
   \caption{Wygładzanie metodą Savitzky-Golay z oknem 7 próbek (M=3) i aproksymacją wielomianem N=2 stopnia. Porównanie prototypu z funkcją z modułu SciPy.signals}
   \label{rys:savitzky_py}
+\end{figure}
+
+\subsection{Usunięcie szumów o niskiej częstotliwości}
+
+Przyjmując dużą szerokość okna filtracji, z sygnału EKG odrzucono wysokie częstotliwości, łącznie z kompleksami QRS i pozostałymi charakterystycznymi zmianami wartości sygnału. Otrzymano w ten sposób izolinię, którą następnie usunięto. Rysunek \ref{rys:remove} przedstawia wyniki usunięcia izolinii dla okna $M=500$ przy aproksymacji wielomianem $N=2$ stopnia.
+
+\begin{figure}[!htb]
+  \begin{center}
+    \includegraphics[scale=0.4]
+    {img/remove_baseline1.png}
+  \end{center}
+  \caption{Wykrycie i usunięcie izolinii sygnału EKG z użyciem filtra Savitzky-Golay o parametrach $M=500$, $N=2$}
+  \label{rys:remove}
 \end{figure}

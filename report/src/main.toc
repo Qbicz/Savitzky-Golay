@@ -6,11 +6,12 @@
 \contentsline {subsection}{\numberline {3.1}Wykorzystane modu\IeC {\l }y}{4}
 \contentsline {subsection}{\numberline {3.2}Oprogramowanie algorytmu}{4}
 \contentsline {subsection}{\numberline {3.3}Warto\IeC {\'s}ci brzegowe}{4}
-\contentsline {section}{\numberline {4}Implementacja}{6}
-\contentsline {subsection}{\numberline {4.1}Wykorzystane biblioteki}{6}
-\contentsline {subsection}{\numberline {4.2}Wyj\IeC {\'s}cie programu}{6}
-\contentsline {subsection}{\numberline {4.3}Por\IeC {\'o}wnanie z modelem programowym}{7}
-\contentsline {section}{Dodatek \numberline {A}Instrukcje}{10}
-\contentsline {subsection}{\numberline {A.1}Uruchomienie prototypu}{10}
-\contentsline {subsection}{\numberline {A.2}Kompilacja aplikacji}{10}
-\contentsline {subsection}{\numberline {A.3}Uruchomienie aplikacji}{10}
+\contentsline {subsection}{\numberline {3.4}Usuni\IeC {\k e}cie szum\IeC {\'o}w o niskiej cz\IeC {\k e}stotliwo\IeC {\'s}ci}{5}
+\contentsline {section}{\numberline {4}Implementacja}{7}
+\contentsline {subsection}{\numberline {4.1}Wykorzystane biblioteki}{7}
+\contentsline {subsection}{\numberline {4.2}Wyj\IeC {\'s}cie programu}{7}
+\contentsline {subsection}{\numberline {4.3}Por\IeC {\'o}wnanie z modelem programowym}{8}
+\contentsline {section}{Dodatek \numberline {A}Instrukcje}{11}
+\contentsline {subsection}{\numberline {A.1}Uruchomienie prototypu}{11}
+\contentsline {subsection}{\numberline {A.2}Kompilacja aplikacji}{11}
+\contentsline {subsection}{\numberline {A.3}Uruchomienie aplikacji}{11}

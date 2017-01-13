@@ -61,8 +61,31 @@ Poniżej przedstawiono porównanie sygnałów przefiltrowanych w prototypie oraz
     {img/implem_vs_proto.png}
   \end{center}
   \caption{Rozbieżności przy filtracji wielomianem $N=2$ stopnia serii $2M+1=21$ próbek}
-  \label{rys:implem}
+  \label{rys:implem1}
 \end{figure}
 
 
-Aby upewnić się jaka rozbieżność istnieje między sygnałami policzono MSE.............................................. (ZROBIĆ)
+Aby upewnić się jaka rozbieżność istnieje między sygnałami policzono błąd średniokwadratowy, jako odniesienie przyjmując wynik filtracji z użyciem funkcji \texttt{scipy.signal.savgol\_filter()}. Wzięto pod uwagę 100 000 próbek, czyli 277 sekund sygnału EKG. 
+\begin{equation}
+MSE = \dfrac{1}{n} \sum\limits_{i=0}^n (x_i - \hat{x_i})^2 
+\end{equation}
+gdzie $x$ to sygnał badany, $\hat{x}$ to sygnał wzorcowy, a $n$ to długość sygnałów.
+
+Wyniki zebrano w tabeli \ref{tab:mse}.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+  \hline 
+  Sygnał badany  & MSE \\  
+  \hline 
+  MIT-BIH 100, filtracja: prototyp & 2.75e-29 \\
+  \hline
+  MIT-BIH 100, filtracja: C++ & 1.96e-9 \\
+  \hline
+\end{tabular} 
+\caption{Parametry filtru}
+\label{tab:mse}
+\end{table}
+
+Warto zauważyć, że sygnały z bazy MIT-BIH charakteryzują się rozdzielczością kwantyzacji $5 \cdot 10^{-6} V$, ponieważ wersja cyfrowa była tworzona przy użyciu przetwornika 11-bitowego w zakresie $10 mV$. Jak widać, metody na większości sygnału działają identycznie. Różnica pojawia się dla ostatnich $M$ próbek, ze względu na drobne różnice w traktowaniu wartości brzegowych.

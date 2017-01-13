@@ -32,7 +32,7 @@ Opracowanego w pracy filtru można użyć w filtracji sygnału EKG na dwa sposob
   \hline 
   Cel / Parametr  & N & M \\  
   \hline 
-  Wyznaczenie izolinii & 2 & 900 \\
+  Wyznaczenie izolinii & 2 & 500 \\
   \hline
   Odfiltrowanie zakłóceń wysokiej częstotliwości & 2 & 5 \\
   \hline

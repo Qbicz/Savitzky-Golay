@@ -23,7 +23,7 @@ t = data[0][:]
 x = data[1][:]
 
 # Savitzky-Golay filtering
-M = 10 # window width is 2M+1
+M = 500 # window width is 2M+1
 N = 2 # fitting polynomial degree
 
 ###
@@ -121,17 +121,29 @@ print(len(t), len(x), len(y), len(x_mirror))
 
 #Here we compare with implementation
 
-implem_data = read_datafile("out_mitdb100_implem_aligned.txt")
-implem_ecg = implem_data[2][:]
+#implem_data = read_datafile("out_mitdb100_implem_aligned.txt")
+#implem_ecg = implem_data[2][:]
 
-print(len(implem_ecg))
+#print(len(implem_ecg))
 print(len(ecg))
 
-plt.plot(t, ecg_reference, 'g-', label="Python prototype")
-plt.plot(t, implem_ecg, 'r-', label="C++ implementation")
+# MSE calculation
+#mse_cpp = ((implem_ecg - ecg_reference) ** 2).max()
+#mse_py = ((y - ecg_reference) ** 2).max()
+#print('MSE: ', mse_cpp, mse_py)
 
-plt.ylabel('ECG signal')
-plt.xlabel('Time [s]')
+ecg_baseline = ecg_filtered
+
+plt.plot(t, ecg_baseline, 'g-', label="Izolinia")
+plt.plot(t, x, 'r-', label="Sygnał EKG")
+
+plt.plot(t, x - ecg_baseline, 'b-', label="Izolinia usunieta")
+
+#plt.plot(t, implem_ecg, 'r-', label="C++ implementation")
+
+plt.ylabel('Sygnał EKG [mV]')
+plt.xlabel('Czas [s]')
 plt.legend(loc=3)
-plt.title('Porownanie filtracji Savitzky-Golay')
+#plt.title('Porównanie filtracji Savitzky-Golay')
+plt.grid()
 plt.show()
