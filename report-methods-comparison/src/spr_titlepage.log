@@ -1,0 +1,331 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.8)  12 DEC 2016 19:42
+entering extended mode
+**spr_titlepage.tex
+(spr_titlepage.tex
+LaTeX2e <2015/01/01> patch level 2
+Babel <3.9m> and hyphenation patterns for 69 languages loaded.
+
+! LaTeX Error: Environment titlepage undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \begin{titlepage}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.6 \center
+           
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 6--6
+[] 
+ []
+
+! Undefined control sequence.
+l.13 \includegraphics
+                     [width=6cm]{../res/img/logo.png}\\[1cm]
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no [ in font nullfont!
+Missing character: There is no w in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no = in font nullfont!
+Missing character: There is no 6 in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no ] in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no / in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no g in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no g in font nullfont!
+! Undefined control sequence.
+<recently read> \LARGE 
+                       
+l.23 im. StanisÅ‚awa Staszica w Krakowie}
+                                         \\[1.5cm]
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no Ã in font cmcsc10!
+Missing character: There is no ³ in font cmcsc10!
+
+Overfull \hbox (49.07198pt too wide) in paragraph at lines 23--23
+ []\OT1/cmr/m/sc/10 Akademia 
+ []
+
+
+Overfull \hbox (44.75807pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 Grniczo- 
+ []
+
+
+Overfull \hbox (46.4053pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 Hutnicza 
+ []
+
+Missing character: There is no Å in font cmcsc10!
+Missing character: There is no ‚ in font cmcsc10!
+
+Overfull \hbox (13.68323pt too wide) in paragraph at lines 23--23
+ []\OT1/cmr/m/sc/10 im. 
+ []
+
+
+Overfull \hbox (30.422pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 Stani- 
+ []
+
+
+Overfull \hbox (23.42215pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 sawa 
+ []
+
+
+Overfull \hbox (30.86644pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 Stasz- 
+ []
+
+
+Overfull \hbox (15.06659pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 ica 
+ []
+
+
+Overfull \hbox (8.35553pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 w 
+ []
+
+
+Overfull \hbox (49.80807pt too wide) in paragraph at lines 23--23
+ \OT1/cmr/m/sc/10 Krakowie 
+ []
+
+! Undefined control sequence.
+<recently read> \Large 
+                       
+l.26 ...e systemy diagnostyki medycznej i terapii}
+                                                  \\[0.5cm]
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (74.34958pt too wide) in paragraph at lines 26--26
+ []\OT1/cmr/m/sc/10 Elektroniczne 
+ []
+
+
+Overfull \hbox (19.06657pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 sys- 
+ []
+
+
+Overfull \hbox (25.08876pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 temy 
+ []
+
+
+Overfull \hbox (13.04437pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 di- 
+ []
+
+
+Overfull \hbox (16.0999pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 ag- 
+ []
+
+
+Overfull \hbox (20.84435pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 nos- 
+ []
+
+
+Overfull \hbox (21.42212pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 tyki 
+ []
+
+
+Overfull \hbox (16.82211pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 me- 
+ []
+
+
+Overfull \hbox (15.93326pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 dy- 
+ []
+
+
+Overfull \hbox (26.88876pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 cznej 
+ []
+
+
+Overfull \hbox (3.0222pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 i 
+ []
+
+
+Overfull \hbox (21.28876pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 ter- 
+ []
+
+
+Overfull \hbox (17.97768pt too wide) in paragraph at lines 26--26
+ \OT1/cmr/m/sc/10 apii 
+ []
+
+! Undefined control sequence.
+l.34 { \huge
+             \bfseries WygÅ‚adzanie sygnaÅ‚u metodÄ… Savitzky-Golay}\\[0.3cm]
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no Å in font cmbx10!
+Missing character: There is no ‚ in font cmbx10!
+Missing character: There is no Å in font cmbx10!
+Missing character: There is no ‚ in font cmbx10!
+Missing character: There is no Ä in font cmbx10!
+Missing character: There is no … in font cmbx10!
+
+Overfull \hbox (61.24269pt too wide) in paragraph at lines 34--34
+ []\OT1/cmr/bx/n/10 Wygadzanie 
+ []
+
+
+Overfull \hbox (20.18877pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 syg- 
+ []
+
+
+Overfull \hbox (18.36794pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 nau 
+ []
+
+
+Overfull \hbox (31.78456pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 metod 
+ []
+
+
+Overfull \hbox (46.4789pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 Savitzky- 
+ []
+
+
+Overfull \hbox (29.3262pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 Golay 
+ []
+
+! Undefined control sequence.
+l.39 \Large
+            \emph{Autorzy:}\\
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (37.78723pt too wide) in paragraph at lines 39--39
+ \OT1/cmr/m/it/10 Autorzy:
+ []
+
+Missing character: There is no P in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no Å in font cmcsc10!
+Missing character: There is no ‚ in font cmcsc10!
+
+Overfull \hbox (34.09702pt too wide) in paragraph at lines 40--40
+ \OT1/cmr/m/sc/10 Paucki
+ []
+
+Missing character: There is no F in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no l in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no p in font nullfont!
+
+Overfull \hbox (18.34154pt too wide) in paragraph at lines 41--41
+ \OT1/cmr/m/sc/10 Ku-
+ []
+
+
+Overfull \hbox (19.75546pt too wide) in paragraph at lines 41--41
+ \OT1/cmr/m/sc/10 bicz
+ []
+
+
+! LaTeX Error: \begin{document} ended by \end{titlepage}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.53 \end{titlepage}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+)
+! Emergency stop.
+<*> spr_titlepage.tex
+                     
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 18 strings out of 493673
+ 221 string characters out of 3141530
+ 53455 words of memory out of 3000000
+ 3463 multiletter control sequences out of 15000+200000
+ 4595 words of font info for 17 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 14i,1n,10p,114b,113s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!

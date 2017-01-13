@@ -1,0 +1,29 @@
+@article{whatissg,
+  title={{What Is a Savitzky-Golay Filter?}},
+  author={{Ronald W. Schafer}},
+  journal={IEEE Signal Processing Magazine, p. 111-117},
+  year={2011}
+}
+
+@article{mit-bih,
+author = {{Goldberger AL, Amaral LAN, Glass L, Hausdorff JM, Ivanov PCh, Mark RG, Mietus JE, Moody GB, Peng C-K, Stanley HE}},
+title = {{PhysioBank, PhysioToolkit, and PhysioNet: Components of a New Research Resource for Complex Physiologic Signals}},
+journal = {{Circulation 101(23):e215-e220 [Circulation Electronic Pages; http://circ.ahajournals.org/content/101/23/e215.full]}},
+year = {2000},
+}
+
+@article{welch2006introduction,
+  title={An introduction to the {Kalman} filter},
+  author={{G. Welch}, {G. Bishop,}},
+  journal={Report instytutowy, University of North Carolina: Chapel Hill, North Carolina, US},
+  year={2006}
+}
+
+@online{Brett,
+author = "Brett Beauregard",	
+	title = "Improving the Beginner's PID",
+	note = "\url{http://brettbeauregard.com/blog/2011/04/improving-the-beginners-pid-introduction/}
+	[Dostęp 04.01.2016]"
+}
+
+\end{thebibliography}

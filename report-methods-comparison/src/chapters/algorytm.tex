@@ -1,0 +1,44 @@
+\section{Algorytm}
+
+Filtr Savitzky-Golay pozwala wygładzić cyfrowy sygnał. Jego działanie opiera się na lokalnym przybliżeniu próbek sygnału wielomianami niskiego rzędu \cite{whatissg}.
+
+Mając dany sygnał x[n], poszukujemy wielomianu
+\begin{equation}
+p(n) = \sum\limits_{k=0}^N a_k n^k
+\end{equation}
+który w otoczeniu $2M+1$ punktów minimalizuje kwadrat błędu aproksymacji
+\begin{equation}
+\epsilon_N = \sum\limits_{n=-M}^M (p(n) - x[n])^2
+\end{equation}
+
+Wtedy dla próbki centralnej pośród $2M+1$ punktów (ma ona indeks $n=0$) wartość odfiltrowanego sygnału przyjmuje
+\begin{equation}
+y[0] = p(0) = a_0
+\end{equation}
+
+W praktyce filtr Savitzky-Golay realizuje swoje zadanie obliczając splot 2M+1 aktualnie branych pod uwagę punktów z wielomianową aproksymacją ciągu z jednostkowym impulsem w środku sekwencji.
+\begin{equation}
+y[n] = \sum\limits_{m=n-M}^{n+M} h[n-m] x[m]
+\end{equation}
+gdzie $h$ jest wynikiem interpolacji wielomianem stopnia $N$ sekwencji z jednostkowym impulsem pośrodku, np. $h = [0, 0, 0, 1, 0, 0, 0]$ dla $M=3$.
+
+
+\subsection{Przyjęte parametry}
+Opracowanego w pracy filtru można użyć w filtracji sygnału EKG na dwa sposoby: do odfiltrowania zakłóceń wysokiej częstotliwości oraz do wyznaczenia izolinii reprezentującej na przykład ruchy związane z oddychaniem pacjenta. Mając wyznaczoną izolinię można potem odjąć ją od sygnału wejściowego otrzymując poprawny sygnał EKG. Tak rozbieżne cele wymagają użycia różnych rozmiarów okna filtracji. Parametry przyjęte w pracy przedstawia tablica \ref{tab:params}.
+
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+  \hline 
+  Cel / Parametr  & N & M \\  
+  \hline 
+  Wyznaczenie izolinii & 2 & 900 \\
+  \hline
+  Odfiltrowanie zakłóceń wysokiej częstotliwości & 2 & 5 \\
+  \hline
+\end{tabular} 
+\caption{Parametry filtru}
+\label{tab:params}
+\end{table}
+
+Szerokość okna filtracji dla szumów o wysokiej częstotliwości dobrano dysponując informacją, że sygnały EKG z bazy MIT-BIH są próbkowane z częstotliwością 360 Hz.
