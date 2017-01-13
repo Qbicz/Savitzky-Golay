@@ -1,20 +1,21 @@
 \section{Wstęp}
 
-Niniejsza praca jest częścią projektu mającego na celu identyfikację zespołu QRS w sygnale z elektrokardiografu. Sygnał EKG zaraz po zebraniu danych jest zaszumiony i wymaga wygładzenia oraz usunięcia zakłóceń. Zakłócenia takie jak pojedyncze ruchy pacjenta trudno wyeliminować bez posiadania dodatkowej wiedzy na temat jego zachowania podczas pomiaru. Możliwe jest jednak odfiltrowanie szumu niskiej częstotliwości pochodzącego od ruchów klatki piersiowej podczas oddychania.
+Niniejsza praca jest częścią projektu mającego na celu identyfikację zespołu QRS w sygnale z elektrokardiografu. Sygnał EKG zaraz po zebraniu danych jest zaszumiony i wymaga wygładzenia oraz usunięcia zakłóceń. Największą przeszkodą w analizie sygnału są zakłócenia niskiej częstotliwości, które mogą pochodzić od ruchów pacjenta (ang. \textit{motion artifacts}), jego oddychania lub zmiany rezystancji połączenia elektrody ze skórą. Zakłócenia wysokiej częstotliwości, które mogą utrudniać interpretację sygnału to szumy pochodzące od elektromiogramu i napięcia zasilającego 50Hz.
 
 Jednym ze sposobów wstępnego przetwarzania sygnału EKG zanim przystąpi się do jego analizy jest filtr Savitzky-Golay.
 
-W naszej części projektu przygotowujemy prototyp algorytmu z użyciem języka Python, a następnie implementację w języku C++. Użyte w projekcie narzędzia przedstawia tabela \ref{tab:tools}.
+W naszej części projektu przygotowujemy prototyp algorytmu z użyciem języka Python, a następnie implementację w języku C++. Dane wykorzystane podczas testów to sygnały z bazy MIT-BIH o numerach 100, 101 oraz 117.
+Użyte w projekcie narzędzia przedstawia tabela \ref{tab:tools}.
 
 \begin{table}[!htb]
   \centering
   \begin{tabular}{|c|c|c|c|}
   \hline
-  Część projektu & Język programowania & Biblioteki \\
+  Część projektu & Język programowania & Biblioteki & Obrazowanie \\
   \hline
-  Prototyp & Python 3.x & NumPy, Matplotlib \\
+  Prototyp & Python 3.5 & NumPy & Matplotlib \\
   \hline
-  Implementacja & C++ & Eigen, gnuplot \\
+  Implementacja & C++ & Eigen & gnuplot \\
   \hline
   \end{tabular}
   \caption{Zestawienie języków programowania i modułów}
