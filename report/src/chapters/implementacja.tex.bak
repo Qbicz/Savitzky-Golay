@@ -89,3 +89,7 @@ Wyniki zebrano w tabeli \ref{tab:mse}.
 \end{table}
 
 Warto zauważyć, że sygnały z bazy MIT-BIH charakteryzują się rozdzielczością kwantyzacji $5 \cdot 10^{-6} V$, ponieważ wersja cyfrowa była tworzona przy użyciu przetwornika 11-bitowego w zakresie $10 mV$. Jak widać, metody na większości sygnału działają identycznie. Różnica pojawia się dla ostatnich $M$ próbek, ze względu na drobne różnice w traktowaniu wartości brzegowych.
+
+\section{Podsumowanie}
+
+Końcowa postać filtru Savitzky-Golay do odszumiania sygnału EKG powinna składać się z dwóch operacji: usunięcia szumów o wysokiej częstotliwości oraz znalezienia izolinii i usunięcia jej, w celu uzyskania sygnału gładkiego, pozostającego w okolicy poziomu 0mV.

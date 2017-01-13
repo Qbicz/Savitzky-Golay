@@ -101,7 +101,7 @@ ecg = x
 start = time.time()
 ecg_reference = signal.savgol_filter(ecg, 2*M+1, N, deriv=0, delta=1.0, axis=-1, mode='mirror', cval=0.0)
 end = time.time()
-print('Refereook %f seconds.' % (end-start))
+print('Reference took %f seconds.' % (end-start))
 print('filtered signal ', ecg_filtered[0:100])
 
 print(len(t), len(x), len(y), len(x_mirror))

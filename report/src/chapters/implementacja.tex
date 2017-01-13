@@ -89,3 +89,10 @@ Wyniki zebrano w tabeli \ref{tab:mse}.
 \end{table}
 
 Warto zauważyć, że sygnały z bazy MIT-BIH charakteryzują się rozdzielczością kwantyzacji $5 \cdot 10^{-6} V$, ponieważ wersja cyfrowa była tworzona przy użyciu przetwornika 11-bitowego w zakresie $10 mV$. Jak widać, metody na większości sygnału działają identycznie. Różnica pojawia się dla ostatnich $M$ próbek, ze względu na drobne różnice w traktowaniu wartości brzegowych.
+
+\section{Podsumowanie}
+
+Końcowa postać filtru Savitzky-Golay do odszumiania sygnału EKG powinna składać się z dwóch operacji: usunięcia szumów o wysokiej częstotliwości oraz znalezienia izolinii i usunięcia jej, w celu uzyskania sygnału gładkiego, pozostającego na równym poziomie mimo oddychania i ruchów pacjenta.
+
+Ponieważ metoda opiera się w głównej mierze na konwolucji sygnału EKG i okne, które jest przygotowywane tylko raz dla całej filtracji z przyjętymi parametrami, metoda jest bardzo szybka. Filtracja 100 000 próbek sygnału EKG z oknem o szerokości $M=500$ prototypem w języku Python trwa tylko 0,09 sekundy.
+

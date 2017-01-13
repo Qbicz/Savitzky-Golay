@@ -42,9 +42,9 @@ Przebieg filtracji zakłóceń o wysokiej częstotliwości uzyskanej za pomocą 
   \label{rys:savitzky_py}
 \end{figure}
 
-\subsection{Usunięcie szumów o niskiej częstotliwości}
+\subsection{Usunięcie szumu o niskiej częstotliwości}
 
-Przyjmując dużą szerokość okna filtracji, z sygnału EKG odrzucono wysokie częstotliwości, łącznie z kompleksami QRS i pozostałymi charakterystycznymi zmianami wartości sygnału. Otrzymano w ten sposób izolinię, którą następnie usunięto. Rysunek \ref{rys:remove} przedstawia wyniki usunięcia izolinii dla okna $M=500$ przy aproksymacji wielomianem $N=2$ stopnia.
+Przyjmując dużą szerokość okna filtracji, z sygnału EKG odrzucono wysokie częstotliwości, łącznie z kompleksami QRS i pozostałymi charakterystycznymi zmianami wartości sygnału. Otrzymano w ten sposób izolinię, którą następnie usunięto, odejmując jej wartości od sygnału EKG. Rysunek \ref{rys:remove} przedstawia wyniki usunięcia izolinii dla okna $M=500$ przy aproksymacji wielomianem $N=2$ stopnia.
 
 \begin{figure}[!htb]
   \begin{center}
