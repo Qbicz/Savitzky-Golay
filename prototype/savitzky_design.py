@@ -17,14 +17,14 @@ data = read_datafile('../mit-bih-txt/mitdb100.txt')
 
 # short test data - 300 samples
 # time vector
-t = data[0][1:100000]
+t = data[0][1:10000]
 
 # ECG vector
-x = data[1][1:100000]
+x = data[1][1:10000]
 
 # Savitzky-Golay filtering
-M = 20 # window width is 2M+1
-N = 3 # fitting polynomial degree
+M = 500 # window width is 2M+1
+N = 2 # fitting polynomial degree
 
 ###
 ##
@@ -126,12 +126,12 @@ print(len(t), len(x), len(y), len(x_mirror))
 
 #print(len(implem_ecg))
 print(len(ecg))
-base = ecg_filtered
+#base = ecg_filtered
 
 # MSE calculation
 #mse_cpp = ((implem_ecg - ecg_reference) ** 2).mean()
-mse_py = ((x - base) ** 2).mean()
-print('MSE: ', mse_py)
+#mse_py = ((x - base) ** 2).mean()
+#print('MSE: ', mse_py)
 
 
 

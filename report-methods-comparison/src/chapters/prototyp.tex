@@ -14,23 +14,27 @@ Wyniki testów czasowych umieszczono w tabeli \ref{tab:time}.
   \hline 
   Algorytm  & Czas wykonania, 250 próbek & Czas wykonania, 100000 próbek \\  
   \hline 
-  EMD, Matlab & 1,14s & 392,1s\\
+  EMD, Matlab, usunięto 1 IMF & 1,04s & 392,1s \\
   \hline
-  EMD, C++ & 95ms & 31,7s \\
+  EMD, Matlab, usunięto 3 IMF & 1,14s & - \\
   \hline
-  NLM, P = 10, M = 2000  & 6.9797e-05 \\
+  EMD, C++, usunięto 1 IMF & 95ms & 31,7s \\
   \hline
-  NLM, usunięto 2 IMF  & 5 \\
+  NLM, Matlab, P = 10, M = 2000  & 21ms & 83,1s \\
   \hline
-  WWF, Matlab  & 0.0786 \\
+  NLM, Matlab, P = 10, M = 100  & 44ms & - \\
   \hline
-  WWF, C++  & 0.0482 \\
+  WWF, Matlab, okno mediany = 201  & 82ms & 27,2s \\
   \hline
-  EMD, usunięto 2 IMF  & 5 \\
+  WWF, Matlab, okno mediany = 21  & 53ms & - \\
   \hline
-  EMD, usunięto 2 IMF  & 5 \\
+  WWF, C++, okno mediany = 201 & 51ms & 18,9s \\
   \hline
-  EMD, usunięto 2 IMF  & 5 \\
+  SG, Python, M=500 & - & 90ms \\
+  \hline
+  SG, Python, M=5 & 5 ms & 19 ms \\ 
+  \hline
+  SG, C++, M=5 & 48 $\mu$s & 2,3 ms \\
   \hline
 \end{tabular} 
 \caption{Parametry filtru}

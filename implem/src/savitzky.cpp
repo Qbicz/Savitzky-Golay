@@ -2,6 +2,7 @@
 #include "Common.h"
 #include <ctime>
 #include <cstdlib>
+#include <chrono>
 
 #define MITDBH_FILE "../../mit-bih-txt/mitdb100short.txt"
 
@@ -173,9 +174,17 @@ int processData(const std::string inputFile, const std::string outputFile, const
     EigenVector mlii = dataHandler.getMlii();
     EigenVector v5 = dataHandler.getV5();
 
-    clock_t begin = clock();
-
+    //clock_t begin = clock();
+    // Microseconds count, since C++11
+    auto start = std::chrono::high_resolution_clock::now();
+    
     EigenVector mliiFilterred = filterSignal(mlii, M, N);
+    
+    auto elapsed = std::chrono::high_resolution_clock::now() - start;
+    long long microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+
+    //clock_t end = clock();
+    
     EigenVector v5Filterred = filterSignal(v5, M, N);
 
     dataHandler.saveMliiFilterred(mliiFilterred);
@@ -183,9 +192,8 @@ int processData(const std::string inputFile, const std::string outputFile, const
 
     dataHandler.saveSignalsToFile(outputFile);
 
-    clock_t end = clock();
-
-    std::cout << "Elapsed time: " << 1000 * ((double)(end - begin) / CLOCKS_PER_SEC) << " [ms]\n";
+    std::cout << "Elapsed " << microseconds << " [us]\n";
+    //std::cout << "Elapsed time: " << 1000 * ((double)(end - begin) / CLOCKS_PER_SEC) << " [ms]\n";
 
     if(outputPlotEnabled)
     {
