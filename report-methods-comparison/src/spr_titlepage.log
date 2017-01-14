@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.8)  12 DEC 2016 19:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.8)  13 JAN 2017 21:01
 entering extended mode
 **spr_titlepage.tex
 (spr_titlepage.tex
@@ -216,22 +216,35 @@ Overfull \hbox (17.97768pt too wide) in paragraph at lines 26--26
 
 ! Undefined control sequence.
 l.34 { \huge
-             \bfseries Wyg≈Çadzanie sygna≈Çu metodƒÖ Savitzky-Golay}\\[0.3cm]
+             \bfseries Por√≥wnianie metod filtracji sygna≈Çu EKG}\\[0.3cm]
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+Missing character: There is no √ in font cmbx10!
+Missing character: There is no ≥ in font cmbx10!
 Missing character: There is no ≈ in font cmbx10!
 Missing character: There is no Ç in font cmbx10!
-Missing character: There is no ≈ in font cmbx10!
-Missing character: There is no Ç in font cmbx10!
-Missing character: There is no ƒ in font cmbx10!
-Missing character: There is no Ö in font cmbx10!
 
-Overfull \hbox (61.24269pt too wide) in paragraph at lines 34--34
- []\OT1/cmr/bx/n/10 Wygadzanie 
+Overfull \hbox (56.36081pt too wide) in paragraph at lines 34--34
+ []\OT1/cmr/bx/n/10 Porwnianie 
+ []
+
+
+Overfull \hbox (31.78456pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 metod 
+ []
+
+
+Overfull \hbox (13.4166pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 fil- 
+ []
+
+
+Overfull \hbox (26.6179pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 tracji 
  []
 
 
@@ -245,18 +258,8 @@ Overfull \hbox (18.36794pt too wide) in paragraph at lines 34--34
  []
 
 
-Overfull \hbox (31.78456pt too wide) in paragraph at lines 34--34
- \OT1/cmr/bx/n/10 metod 
- []
-
-
-Overfull \hbox (46.4789pt too wide) in paragraph at lines 34--34
- \OT1/cmr/bx/n/10 Savitzky- 
- []
-
-
-Overfull \hbox (29.3262pt too wide) in paragraph at lines 34--34
- \OT1/cmr/bx/n/10 Golay 
+Overfull \hbox (25.29152pt too wide) in paragraph at lines 34--34
+ \OT1/cmr/bx/n/10 EKG 
  []
 
 ! Undefined control sequence.
@@ -300,6 +303,102 @@ Overfull \hbox (19.75546pt too wide) in paragraph at lines 41--41
  \OT1/cmr/m/sc/10 bicz
  []
 
+Missing character: There is no S in font nullfont!
+Missing character: There is no z in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no z in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no √ in font cmcsc10!
+Missing character: There is no ≥ in font cmcsc10!
+
+Overfull \hbox (19.68872pt too wide) in paragraph at lines 42--42
+ \OT1/cmr/m/sc/10 Mr-
+ []
+
+
+Overfull \hbox (20.84438pt too wide) in paragraph at lines 42--42
+ \OT1/cmr/m/sc/10 wka
+ []
+
+Missing character: There is no M in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no t in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no z in font nullfont!
+Missing character: There is no ≈ in font cmcsc10!
+Missing character: There is no ∫ in font cmcsc10!
+
+Overfull \hbox (20.89705pt too wide) in paragraph at lines 43--43
+ \OT1/cmr/m/sc/10 Wo-
+ []
+
+
+Overfull \hbox (21.64436pt too wide) in paragraph at lines 43--43
+ \OT1/cmr/m/sc/10 niak
+ []
+
+Missing character: There is no T in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no z in font nullfont!
+
+Overfull \hbox (36.40259pt too wide) in paragraph at lines 44--44
+ \OT1/cmr/m/sc/10 Gawlin
+ []
+
+Missing character: There is no T in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no m in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no s in font nullfont!
+Missing character: There is no z in font nullfont!
+Missing character: There is no ≈ in font cmcsc10!
+Missing character: There is no Ñ in font cmcsc10!
+
+Overfull \hbox (27.05264pt too wide) in paragraph at lines 45--45
+ \OT1/cmr/m/sc/10 Kaka
+ []
+
+Missing character: There is no K in font nullfont!
+Missing character: There is no o in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no d in font nullfont!
+
+Overfull \hbox (55.78304pt too wide) in paragraph at lines 46--46
+ \OT1/cmr/m/sc/10 Adasiewicz
+ []
+
+Missing character: There is no M in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no c in font nullfont!
+Missing character: There is no h in font nullfont!
+Missing character: There is no a in font nullfont!
+Missing character: There is no ≈ in font nullfont!
+Missing character: There is no Ç in font nullfont!
+
+Overfull \hbox (19.79984pt too wide) in paragraph at lines 47--47
+ \OT1/cmr/m/sc/10 Ma-
+ []
+
+
+Overfull \hbox (36.46646pt too wide) in paragraph at lines 47--47
+ \OT1/cmr/m/sc/10 ciejew-
+ []
+
+
+Overfull \hbox (13.95549pt too wide) in paragraph at lines 47--47
+ \OT1/cmr/m/sc/10 ski
+ []
+
 
 ! LaTeX Error: \begin{document} ended by \end{titlepage}.
 
@@ -307,7 +406,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.53 \end{titlepage}
+l.59 \end{titlepage}
                     
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -323,7 +422,7 @@ or  <return>  to continue without it.
 Here is how much of TeX's memory you used:
  18 strings out of 493673
  221 string characters out of 3141530
- 53455 words of memory out of 3000000
+ 54455 words of memory out of 3000000
  3463 multiletter control sequences out of 15000+200000
  4595 words of font info for 17 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191

@@ -1,23 +1,26 @@
 \section{Wstęp}
 
-Niniejsza praca jest częścią projektu mającego na celu identyfikację zespołu QRS w sygnale z elektrokardiografu. Sygnał EKG zaraz po zebraniu danych jest zaszumiony i wymaga wygładzenia oraz usunięcia zakłóceń. Największą przeszkodą w analizie sygnału są zakłócenia niskiej częstotliwości, które mogą pochodzić od ruchów pacjenta (ang. \textit{motion artifacts}), jego oddychania lub zmiany rezystancji połączenia elektrody ze skórą. Zakłócenia wysokiej częstotliwości, które mogą utrudniać interpretację sygnału to szumy pochodzące od elektromiogramu i napięcia zasilającego 50Hz.
+W ramach przedmiotu \textit{Elektroniczne systemy diagnostyki medycznej i terapii} zadaniem czterech grup dwuosobowych było przygotowanie algorytmów wstępnego przetwarzania sygnału EKG. Niniejsze sprawozdanie porównuje metody filtracji, badając jakie zakłócenia można z ich pomocą usunąć i jakiego czasu wymaga ich wykonanie.
 
-Jednym ze sposobów wstępnego przetwarzania sygnału EKG zanim przystąpi się do jego analizy jest filtr Savitzky-Golay.
+Praca przebiegała w następujący sposób: w pierwszej fazie przygotowano prototypy z użyciem języków skryptowych. Te wersje programów użyto do dobierania parametrów i badania zachowania algorytmów. Następnie grupy zrealizowały implementacje w języku C++ z użyciem biblioteki Eigen, w celu przyspieszenia programów i zmniejszenia ich zapotrzebowania na zasoby. Następnie wyniki zostały porównane, a algorytmy poddano ocenie której wyniki znalazły się w niniejszym opracowaniu.
 
-W naszej części projektu przygotowujemy prototyp algorytmu z użyciem języka Python, a następnie implementację w języku C++. Dane wykorzystane podczas testów to sygnały z bazy MIT-BIH o numerach 100, 101 oraz 117.
-Użyte w projekcie narzędzia przedstawia tabela \ref{tab:tools}.
+Metody filtracji, które zostały zrealizowane, to metoda nielokalnych średnich (NLM), empiryczny rozkład modalny (EMD), filtracja z użyciem falek Wienera (WWF) i filtr Savitzky-Golay (SG). Zestawienie nazw, skrótów które będą używane w sprawozdaniu oraz języków prototypowania przedstawia tabela \ref{tab:skroty}.
 
 \begin{table}[!htb]
   \centering
   \begin{tabular}{|c|c|c|c|}
   \hline
-  Część projektu & Język programowania & Biblioteki & Obrazowanie \\
+  Metoda filtracji & Skrót & Język prototypowania \\
   \hline
-  Prototyp & Python 3.5 & NumPy & Matplotlib \\
+  \textbf{Nonlocal Means} & NLM & Matlab \\
   \hline
-  Implementacja & C++ & Eigen & gnuplot \\
+  \textbf{Empirical Mode Decomposition} & EMD & Matlab \\
+  \hline
+  \textbf{Wiener Wavelet Filter} & WWF & Matlab \\
+  \hline
+  \textbf{Savitzky-Golay} & SG & Python + SciPy \\
   \hline
   \end{tabular}
-  \caption{Zestawienie języków programowania i modułów}
-  \label{tab:tools}
+  \caption{Zestawienie zrealizowanych algorytmów}
+  \label{tab:skroty}
 \end{table}

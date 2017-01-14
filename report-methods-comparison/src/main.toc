@@ -1,16 +1,8 @@
 \select@language {polish}
 \contentsline {section}{\numberline {1}Wst\IeC {\k e}p}{2}
-\contentsline {section}{\numberline {2}Algorytm}{3}
-\contentsline {subsection}{\numberline {2.1}Przyj\IeC {\k e}te parametry}{3}
-\contentsline {section}{\numberline {3}Prototyp programu}{4}
-\contentsline {subsection}{\numberline {3.1}Wykorzystane modu\IeC {\l }y}{4}
-\contentsline {subsection}{\numberline {3.2}Oprogramowanie algorytmu}{4}
-\contentsline {subsection}{\numberline {3.3}Warto\IeC {\'s}ci brzegowe}{4}
-\contentsline {section}{\numberline {4}Implementacja}{6}
-\contentsline {subsection}{\numberline {4.1}Wykorzystane biblioteki}{6}
-\contentsline {subsection}{\numberline {4.2}Wyj\IeC {\'s}cie programu}{6}
-\contentsline {subsection}{\numberline {4.3}Por\IeC {\'o}wnanie z modelem programowym}{7}
-\contentsline {section}{Dodatek \numberline {A}Instrukcje}{10}
-\contentsline {subsection}{\numberline {A.1}Uruchomienie prototypu}{10}
-\contentsline {subsection}{\numberline {A.2}Kompilacja aplikacji}{10}
-\contentsline {subsection}{\numberline {A.3}Uruchomienie aplikacji}{10}
+\contentsline {section}{\numberline {2}Jako\IeC {\'s}ciowe por\IeC {\'o}wnanie algorytm\IeC {\'o}w}{3}
+\contentsline {subsection}{\numberline {2.1}Widmowa g\IeC {\k e}sto\IeC {\'s}\IeC {\'c} mocy}{3}
+\contentsline {subsection}{\numberline {2.2}Dyskusja zak\IeC {\l }\IeC {\'o}ce\IeC {\'n} w dziedzinie cz\IeC {\k e}stotliwo\IeC {\'s}ci}{6}
+\contentsline {subsection}{\numberline {2.3}B\IeC {\l }\IeC {\k a}d \IeC {\'s}redniokwadratowy}{7}
+\contentsline {section}{\numberline {3}Testy wydajno\IeC {\'s}ci algorytm\IeC {\'o}w}{9}
+\contentsline {subsection}{\numberline {3.1}Wyniki test\IeC {\'o}w czasowych}{9}

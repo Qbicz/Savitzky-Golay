@@ -1,43 +1,54 @@
-\section{Prototyp programu}
-\subsection{Wykorzystane moduły}
-Przed przystąpieniem do pracy nad algorytmem, użyliśmy biblioteki \textbf{WFDB} dla środowiska MATLAB, która umożliwiła pobranie danych EKG z bazy MIT-BIH\cite{mit-bih}.
+\section{Testy wydajności algorytmów}
 
-W prototypowej wersji programu użyliśmy modułu \textbf{NumPy} do operacji na macierzach i operacji numerycznych, w tym: interpolacji wielomianowej, sklejania i obracania wektorów. 
-Moduł matplotlib.pyplot posłużył do obrazowania wyników.
+Wydajność algorytmu jest obok poprawności kluczową cechą. Niektóre szybko działające algorytmy można wykorzystać do analizy zbieranych danych w locie (on-line) i użyć do szybkiej diagnostyki np. w przenośnych aparatach EKG. Jeśli algorytm wymaga wielkich nakładów obliczeniowych, może posłużyć wyłącznie do przetwarzania danych po ich zebraniu.
 
-\subsection{Oprogramowanie algorytmu}
-Ponieważ odpowiedź impulsowa filtru $h$ jest niezależna od wartości sygnału, wartości wektora $h$ o długości $2M+1$ wystarczy obliczyć raz, a następnie obliczyć wartość konwolucji sygnału z taką maską. Wartości maski zostały pokazane na rysunku \ref{rys:impuls}.
+\subsection{Wyniki testów czasowych}
 
-\begin{figure}[!htb]
-  \begin{center}
-    \includegraphics[scale=0.8]
-    {img/impulse.png}
-  \end{center}
-  \caption{Odpowiedź impulsowa filtru, uzyskana jako interpolacja wielomianem $N=2$ stopnia serii $2M+1=7$ próbek z jednostkowym impulsem pośrodku}
-  \label{rys:impuls}
-\end{figure}
+Testy były przeprowadzane na komputerze z procesorem Intel i7-3610QM i pamięcią RAM 8GB DDR3. Prototypy były uruchamiane pod systemem Windows 8.1 64-bit, w Matlabie R2016a lub z użyciem Pythona 3.5.2 z NumPy 1.11.1 i SciPy 0.18.1. Implementacje C++ kompilowano z użyciem gcc 5.4 z optymalizacją -Ofast i uruchamiano pod systemem Ubuntu 14.04LTS 64-bit.
 
-\subsection{Wartości brzegowe}
-Algorytm w każdym punkcie potrzebuje do obliczeń $M$ punktów z lewej i $M$ punktów z prawej strony, zatem należy zdecydować o zachowaniu programu na początku i na końcu spróbkowanego sygnału.
+Wyniki testów czasowych umieszczono w tabeli \ref{tab:time}.
 
-Istnieje kilka możliwych rozwiązań:
-\begin{enumerate}
-\item Zawijanie - algorytm wykorzysta pierwsze $M$ punktów na końcu oraz ostatnie $M$ punktów na początku sygnału
-\item Odbicie - na brzegach zostaną wykorzystane najbliższe punkty, jednak w odwróconej kolejności
-\item Użycie stałej, ustalonej wartości
-\item Najbliższy sąsiad - poza granicami sygnału zostaną dopisane punkty równe pierwszej próbce (na początku) i ostatniej próbce (na końcu)
-\end{enumerate}
+\begin{table}[!htb]
+  \centering
+  \begin{tabular}{|c|c|c|c|}
+  \hline 
+  Algorytm  & Czas wykonania, 250 próbek & Czas wykonania, 100000 próbek \\  
+  \hline 
+  EMD, Matlab & 1,14s & 392,1s\\
+  \hline
+  EMD, C++ & 95ms & 31,7s \\
+  \hline
+  NLM, P = 10, M = 2000  & 6.9797e-05 \\
+  \hline
+  NLM, usunięto 2 IMF  & 5 \\
+  \hline
+  WWF, Matlab  & 0.0786 \\
+  \hline
+  WWF, C++  & 0.0482 \\
+  \hline
+  EMD, usunięto 2 IMF  & 5 \\
+  \hline
+  EMD, usunięto 2 IMF  & 5 \\
+  \hline
+  EMD, usunięto 2 IMF  & 5 \\
+  \hline
+\end{tabular} 
+\caption{Parametry filtru}
+\label{tab:time}
+\end{table}
 
-W prototypie wybraliśmy rozwiązanie 2. Jeśli ostatnie punkty mają wartości $[6, 7, 8, 9]$, to dopisane poza prawą granicą punkty otrzymają wartości $[8, 7, 6]$.
 
 
-Przebieg filtracji zakłóceń o wysokiej częstotliwości uzyskanej za pomocą prototypu Python przedstawia wykres \ref{rys:savitzky_py}
+Bibliografia
 
-\begin{figure}[!htb]
-  \begin{center}
-    \includegraphics[scale=0.8]
-    {img/prototype.png}
-  \end{center}
-  \caption{Wygładzanie metodą Savitzky-Golay z oknem 7 próbek (M=3) i aproksymacją wielomianem N=2 stopnia. Porównanie prototypu z funkcją z modułu SciPy.signals}
-  \label{rys:savitzky_py}
-\end{figure}
+Noise in ECG and how Noise in ECG and how
+to deal with it to deal with it
+Djordje Popovic
+http://www-classes.usc.edu/engr/bme/620/LectureECGNoise.pdf
+
+ECG Statistics, Noise, Artifacts,
+and Missing Data
+Gari D. Clifford
+http://www.mit.edu/~gari/ecgbook/ch3.pdf
+
+
